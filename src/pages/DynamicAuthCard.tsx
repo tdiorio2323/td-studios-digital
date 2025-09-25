@@ -5,12 +5,14 @@ import authCards from "@/data/authCards.json";
 
 const DynamicAuthCard = () => {
   const { slug } = useParams<{ slug: string }>();
-  
+
   if (!slug) {
     return <div>No slug provided</div>;
   }
 
-  const cardData = (authCards as AuthCardData[]).find(card => card.slug === slug);
+  const cardData = (authCards as AuthCardData[]).find(
+    (card) => card.slug === slug
+  );
 
   if (!cardData) {
     return (

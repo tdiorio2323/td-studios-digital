@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +20,7 @@ interface EditableCard extends AuthCardData {
 export const MassCardEditor: React.FC = () => {
   const [cards, setCards] = useState<EditableCard[]>([]);
   const [selectedCard, setSelectedCard] = useState<EditableCard | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
   // Load cards from JSON
@@ -30,22 +30,26 @@ export const MassCardEditor: React.FC = () => {
 
   const loadCards = async () => {
     try {
-      const response = await fetch('/src/data/authCards.json');
+      const response = await fetch("/src/data/authCards.json");
       const cardsData = await response.json();
       setCards(cardsData);
       setLoading(false);
     } catch (error) {
-      console.error('Failed to load cards:', error);
+      console.error("Failed to load cards:", error);
       setLoading(false);
     }
   };
 
   const saveCard = (updatedCard: EditableCard) => {
-    setCards(cards.map(card => 
-      card.slug === updatedCard.slug ? { ...updatedCard, isEditing: false } : card
-    ));
+    setCards(
+      cards.map((card) =>
+        card.slug === updatedCard.slug
+          ? { ...updatedCard, isEditing: false }
+          : card
+      )
+    );
     setSelectedCard(null);
-    
+
     // Save to JSON file (you'll need to implement server-side saving)
     saveCardsToFile();
   };
@@ -53,22 +57,22 @@ export const MassCardEditor: React.FC = () => {
   const saveCardsToFile = async () => {
     try {
       // This would need a backend endpoint to save the JSON file
-      const response = await fetch('/api/save-cards', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cards)
+      const response = await fetch("/api/save-cards", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cards),
       });
-      
+
       if (response.ok) {
-        console.log('Cards saved successfully');
+        console.log("Cards saved successfully");
       }
     } catch (error) {
-      console.error('Failed to save cards:', error);
+      console.error("Failed to save cards:", error);
     }
   };
 
   const deleteCard = (slug: string) => {
-    setCards(cards.filter(card => card.slug !== slug));
+    setCards(cards.filter((card) => card.slug !== slug));
     saveCardsToFile();
   };
 
@@ -76,16 +80,17 @@ export const MassCardEditor: React.FC = () => {
     const newCard = {
       ...card,
       slug: `${card.slug}-copy-${Date.now()}`,
-      title: `${card.title} (Copy)`
+      title: `${card.title} (Copy)`,
     };
     setCards([...cards, newCard]);
     saveCardsToFile();
   };
 
-  const filteredCards = cards.filter(card => 
-    card.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    card.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    card.slug.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCards = cards.filter(
+    (card) =>
+      card.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      card.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      card.slug.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
@@ -99,10 +104,11 @@ export const MassCardEditor: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-950 to-black p-4">
       <div className="max-w-7xl mx-auto">
-        
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Mass Card Editor</h1>
+          <h1 className="text-4xl font-bold text-white mb-2">
+            Mass Card Editor
+          </h1>
           <p className="text-white/80">Edit hundreds of link cards with ease</p>
         </div>
 
@@ -117,19 +123,25 @@ export const MassCardEditor: React.FC = () => {
                 className="bg-white/20 border-white/30 text-white placeholder:text-white/60"
               />
             </div>
-            
+
             <div className="flex gap-2">
-              <Button variant="outline" className="bg-white/20 border-white/30 text-white hover:bg-white/30">
+              <Button
+                variant="outline"
+                className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+              >
                 <Upload className="w-4 h-4 mr-2" />
                 Import Batch
               </Button>
-              <Button variant="outline" className="bg-white/20 border-white/30 text-white hover:bg-white/30">
+              <Button
+                variant="outline"
+                className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+              >
                 <Download className="w-4 h-4 mr-2" />
                 Export All
               </Button>
             </div>
           </div>
-          
+
           <div className="mt-4 text-sm text-white/70">
             {filteredCards.length} of {cards.length} cards shown
           </div>
@@ -174,14 +186,14 @@ const MassCardEditorItem: React.FC<MassCardEditorItemProps> = ({
   card,
   onEdit,
   onDelete,
-  onDuplicate
+  onDuplicate,
 }) => {
   return (
     <Card className="bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/20 transition-all">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-3">
-          <img 
-            src={card.image} 
+          <img
+            src={card.image}
             alt={card.title}
             className="w-12 h-12 rounded-full object-cover border-2 border-white/30"
           />
@@ -191,19 +203,17 @@ const MassCardEditorItem: React.FC<MassCardEditorItemProps> = ({
           </div>
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-3">
+        <div className="text-xs text-white/60">Slug: {card.slug}</div>
+
         <div className="text-xs text-white/60">
-          Slug: {card.slug}
+          {card.buttons.length} button{card.buttons.length !== 1 ? "s" : ""}
         </div>
-        
-        <div className="text-xs text-white/60">
-          {card.buttons.length} button{card.buttons.length !== 1 ? 's' : ''}
-        </div>
-        
+
         <div className="flex gap-2">
-          <Button 
-            size="sm" 
+          <Button
+            size="sm"
             variant="outline"
             className="flex-1 bg-white/20 border-white/30 text-white hover:bg-white/30"
             onClick={() => onEdit(card)}
@@ -211,16 +221,16 @@ const MassCardEditorItem: React.FC<MassCardEditorItemProps> = ({
             <Eye className="w-3 h-3 mr-1" />
             Edit
           </Button>
-          <Button 
-            size="sm" 
+          <Button
+            size="sm"
             variant="outline"
             className="bg-white/20 border-white/30 text-white hover:bg-white/30"
             onClick={() => onDuplicate(card)}
           >
             <Plus className="w-3 h-3" />
           </Button>
-          <Button 
-            size="sm" 
+          <Button
+            size="sm"
             variant="outline"
             className="bg-red-500/20 border-red-400/30 text-red-200 hover:bg-red-500/30"
             onClick={() => onDelete(card.slug)}
@@ -239,17 +249,25 @@ interface CardEditorModalProps {
   onClose: () => void;
 }
 
-const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose }) => {
+const CardEditorModal: React.FC<CardEditorModalProps> = ({
+  card,
+  onSave,
+  onClose,
+}) => {
   const [editedCard, setEditedCard] = useState<EditableCard>({ ...card });
 
   const addButton = () => {
     setEditedCard({
       ...editedCard,
-      buttons: [...editedCard.buttons, { label: 'New Button', url: '#' }]
+      buttons: [...editedCard.buttons, { label: "New Button", url: "#" }],
     });
   };
 
-  const updateButton = (index: number, field: 'label' | 'url', value: string) => {
+  const updateButton = (
+    index: number,
+    field: "label" | "url",
+    value: string
+  ) => {
     const newButtons = [...editedCard.buttons];
     newButtons[index] = { ...newButtons[index], [field]: value };
     setEditedCard({ ...editedCard, buttons: newButtons });
@@ -258,7 +276,7 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
   const removeButton = (index: number) => {
     setEditedCard({
       ...editedCard,
-      buttons: editedCard.buttons.filter((_, i) => i !== index)
+      buttons: editedCard.buttons.filter((_, i) => i !== index),
     });
   };
 
@@ -267,8 +285,12 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
       <div className="bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-white">Edit Card: {card.title}</h2>
-            <Button variant="outline" onClick={onClose}>Close</Button>
+            <h2 className="text-2xl font-bold text-white">
+              Edit Card: {card.title}
+            </h2>
+            <Button variant="outline" onClick={onClose}>
+              Close
+            </Button>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -278,7 +300,9 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
                 <Label className="text-white">Title</Label>
                 <Input
                   value={editedCard.title}
-                  onChange={(e) => setEditedCard({ ...editedCard, title: e.target.value })}
+                  onChange={(e) =>
+                    setEditedCard({ ...editedCard, title: e.target.value })
+                  }
                   className="bg-white/10 border-white/30 text-white"
                 />
               </div>
@@ -287,7 +311,9 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
                 <Label className="text-white">Username</Label>
                 <Input
                   value={editedCard.username}
-                  onChange={(e) => setEditedCard({ ...editedCard, username: e.target.value })}
+                  onChange={(e) =>
+                    setEditedCard({ ...editedCard, username: e.target.value })
+                  }
                   className="bg-white/10 border-white/30 text-white"
                 />
               </div>
@@ -296,7 +322,9 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
                 <Label className="text-white">Slug (URL)</Label>
                 <Input
                   value={editedCard.slug}
-                  onChange={(e) => setEditedCard({ ...editedCard, slug: e.target.value })}
+                  onChange={(e) =>
+                    setEditedCard({ ...editedCard, slug: e.target.value })
+                  }
                   className="bg-white/10 border-white/30 text-white"
                 />
               </div>
@@ -305,7 +333,9 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
                 <Label className="text-white">Image URL</Label>
                 <Input
                   value={editedCard.image}
-                  onChange={(e) => setEditedCard({ ...editedCard, image: e.target.value })}
+                  onChange={(e) =>
+                    setEditedCard({ ...editedCard, image: e.target.value })
+                  }
                   className="bg-white/10 border-white/30 text-white"
                 />
               </div>
@@ -326,17 +356,21 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
                       <Input
                         placeholder="Button Label"
                         value={button.label}
-                        onChange={(e) => updateButton(index, 'label', e.target.value)}
+                        onChange={(e) =>
+                          updateButton(index, "label", e.target.value)
+                        }
                         className="bg-white/10 border-white/30 text-white"
                       />
                       <Input
                         placeholder="Button URL"
                         value={button.url}
-                        onChange={(e) => updateButton(index, 'url', e.target.value)}
+                        onChange={(e) =>
+                          updateButton(index, "url", e.target.value)
+                        }
                         className="bg-white/10 border-white/30 text-white flex-1"
                       />
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
                         onClick={() => removeButton(index)}
                         className="bg-red-500/20 border-red-400/30 text-red-200"
@@ -349,7 +383,7 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
               </div>
 
               {/* Save Button */}
-              <Button 
+              <Button
                 onClick={() => onSave(editedCard)}
                 className="w-full bg-white text-black hover:bg-white/90"
               >
@@ -360,7 +394,9 @@ const CardEditorModal: React.FC<CardEditorModalProps> = ({ card, onSave, onClose
 
             {/* Live Preview */}
             <div className="lg:sticky lg:top-6">
-              <Label className="text-white text-lg mb-4 block">Live Preview</Label>
+              <Label className="text-white text-lg mb-4 block">
+                Live Preview
+              </Label>
               <div className="bg-black/30 rounded-lg p-4 max-h-96 overflow-hidden">
                 <AuthCard {...editedCard} />
               </div>

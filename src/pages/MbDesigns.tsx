@@ -1,39 +1,32 @@
 import React from "react";
 import { AuthPage } from "@/components/AuthPage";
 
-// MBM Designs page
+// TD Linkage page
 const MbDesigns = () => {
-  // Card logo (centered inside card) - MBM logo
-  const logo = "/MBM.png";
+  // Card logo (centered inside card) - TD USA flag logo
+  const logo = "/images/TD FLAG USA.png";
 
-  // Bouncing background logo (desktop only) - using MBM images
-  const bounce = [
-    "/MBM/MBM01.png",
-    "/MBM/MBM02.png",
-  ];
+  // Bouncing background logo (desktop only) - using TD images
+  const bounce = ["/images/TD FLAG USA.png", "/images/TD FLAG USA.png"];
 
-  // MBM slideshow images for the bottom image box (specific 7 images)
-  const mbmImages = [
-    "/MBM/MBM13.png",
-    "/MBM/MBM11.png",
-    "/MBM/MBM12.png",
-    "/MBM/MBM10.png",
-    "/MBM/MBM09.jpg",
-    "/MBM/MBM08.png",
-    "/MBM/MBM07.png"
+  // TD Linkage slideshow images for the bottom image box (3 images)
+  const tdLinkageImages = [
+    "/tdlinkage-slide1.png",
+    "/tdlinkage-slide2.jpg",
+    "/tdlinkage-slide3.png",
   ];
 
   // Use first image as default, slideshow will cycle through all
-  const promoImage = mbmImages[0];
+  const promoImage = tdLinkageImages[0];
 
   // Set page background - using diamond background
   const bg = "/diamond-bg.jpg";
 
-  // Custom buttons for MBM
+  // Custom buttons for TD Linkage (no URLs - no embedded links)
   const customButtons = [
-    { label: "MBM WEBSITE", url: "https://mylarprintz.com/" },
-    { label: "PREMADE DESIGNS", url: "https://mylarprintz.com/collections/all" },
-    { label: "CONTACT", url: "https://mylarprintz.com/pages/contact" }
+    { label: "TD WEBSITE", url: "" },
+    { label: "DESIGNS", url: "" },
+    { label: "CONTACT", url: "" },
   ];
 
   return (
@@ -45,7 +38,8 @@ const MbDesigns = () => {
       hideAuthForm
       extraImageSrc={promoImage}
       bgImageSrc={bg}
-      slideshowImages={mbmImages}
+      slideshowImages={tdLinkageImages}
+      slideshowInterval={1500}
       customButtons={customButtons}
       mainImageSrc={logo}
     />

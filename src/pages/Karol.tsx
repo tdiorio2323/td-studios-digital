@@ -2,9 +2,9 @@ export default function Karol() {
   return (
     <div
       className="min-h-dvh w-full bg-cover bg-center bg-no-repeat relative"
-      style={{ 
+      style={{
         backgroundImage: "url('/images/para.webp')",
-        backgroundPosition: "center top"
+        backgroundPosition: "center top",
       }}
     >
       {/* Subtle overlay for better text readability */}
@@ -74,10 +74,14 @@ export default function Karol() {
 
           {/* Verification Badge */}
           <div className="flex justify-center mt-6">
-            <div className="flex items-center space-x-2 bg-[#1da1f2]/90 backdrop-blur-sm 
-                          rounded-full px-4 py-2 border border-white/20">
+            <div
+              className="flex items-center space-x-2 bg-[#1da1f2]/90 backdrop-blur-sm 
+                          rounded-full px-4 py-2 border border-white/20"
+            >
               <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-white text-xs font-medium">Verified Profile</span>
+              <span className="text-white text-xs font-medium">
+                Verified Profile
+              </span>
             </div>
           </div>
         </div>

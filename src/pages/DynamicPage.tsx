@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { AuthCard, AuthCardData } from '../components/AuthCard';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { AuthCard, AuthCardData } from "../components/AuthCard";
 
 export const DynamicPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -12,10 +12,10 @@ export const DynamicPage: React.FC = () => {
     if (!slug) return;
 
     // Load the card data
-    fetch('/src/data/authCards.json')
-      .then(response => response.json())
+    fetch("/src/data/authCards.json")
+      .then((response) => response.json())
       .then((cards: AuthCardData[]) => {
-        const foundCard = cards.find(c => c.slug === slug);
+        const foundCard = cards.find((c) => c.slug === slug);
         if (foundCard) {
           setCard(foundCard);
           // Set page title

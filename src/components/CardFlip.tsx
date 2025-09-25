@@ -40,11 +40,11 @@ export default function CardFlip({
       onKeyDown={
         allowClick
           ? (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              toggle();
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggle();
+              }
             }
-          }
           : undefined
       }
       aria-label="Flip card"
@@ -54,7 +54,9 @@ export default function CardFlip({
           "relative w-full h-full",
           "[transform-style:preserve-3d]",
           "transition-all duration-700",
-          isFlipped ? "[transform:rotateY(180deg)]" : "[transform:rotateY(0deg)]"
+          isFlipped
+            ? "[transform:rotateY(180deg)]"
+            : "[transform:rotateY(0deg)]"
         )}
       >
         {/* Front */}
@@ -153,9 +155,11 @@ export default function CardFlip({
                   key={feature}
                   className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300 transition-all duration-500"
                   style={{
-                    transform: isFlipped ? "translateX(0)" : "translateX(-10px)",
+                    transform: isFlipped
+                      ? "translateX(0)"
+                      : "translateX(-10px)",
                     opacity: isFlipped ? 1 : 0,
-                    transitionDelay: `${index * 100 + 200}ms`
+                    transitionDelay: `${index * 100 + 200}ms`,
                   }}
                 >
                   <ArrowRight className="w-3 h-3 text-orange-500" />

@@ -1,8 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
-  fallback?: React.ComponentType<{ error: Error; resetErrorBoundary: () => void }>;
+  fallback?: React.ComponentType<{
+    error: Error;
+    resetErrorBoundary: () => void;
+  }>;
 }
 
 interface ErrorBoundaryState {
@@ -13,26 +16,30 @@ interface ErrorBoundaryState {
 const logErrorToService = (error: Error, errorInfo: React.ErrorInfo) => {
   // In development, log to console
   if (import.meta.env.DEV) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
   }
 
   // In production, you could send to an error tracking service
   // Example: Sentry, LogRocket, etc.
 };
 
-const DefaultFallback: React.FC<{ error: Error; resetErrorBoundary: () => void }> = ({
-  error,
-  resetErrorBoundary
-}) => (
+const DefaultFallback: React.FC<{
+  error: Error;
+  resetErrorBoundary: () => void;
+}> = ({ error, resetErrorBoundary }) => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
     <div className="max-w-md mx-auto text-center p-8 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
-      <h2 className="text-2xl font-bold text-white mb-4">Something went wrong</h2>
+      <h2 className="text-2xl font-bold text-white mb-4">
+        Something went wrong
+      </h2>
       <p className="text-white/80 mb-6">
         An unexpected error occurred. Please try refreshing the page.
       </p>
       {import.meta.env.DEV && (
         <details className="text-left mb-4">
-          <summary className="cursor-pointer text-white/60 text-sm">Error details</summary>
+          <summary className="cursor-pointer text-white/60 text-sm">
+            Error details
+          </summary>
           <pre className="text-xs text-red-300 mt-2 p-2 bg-black/20 rounded overflow-auto">
             {error.message}
           </pre>
@@ -48,7 +55,10 @@ const DefaultFallback: React.FC<{ error: Error; resetErrorBoundary: () => void }
   </div>
 );
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null };
@@ -69,7 +79,12 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   render() {
     if (this.state.hasError && this.state.error) {
       const Fallback = this.props.fallback || DefaultFallback;
-      return <Fallback error={this.state.error} resetErrorBoundary={this.resetErrorBoundary} />;
+      return (
+        <Fallback
+          error={this.state.error}
+          resetErrorBoundary={this.resetErrorBoundary}
+        />
+      );
     }
 
     return this.props.children;

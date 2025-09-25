@@ -1,0 +1,13 @@
+screenshots/
+nav-report/
+visdedupe_report.html
+public/_shop-manifest.json
+public/_shop-layout.json
+dist/
+build/
+node_modules/
+coverage/
+*.log
+.env
+.env.local
+.env.production

@@ -1,5 +1,5 @@
-import React from 'react';
-import GlassCard from '@/components/GlassCard';
+import React from "react";
+import GlassCard from "@/components/GlassCard";
 
 export type EditableItem = {
   id: string;
@@ -20,12 +20,25 @@ type Props = {
   onDrop?: (id: string) => void;
 };
 
-export const EditableProductCard: React.FC<Props> = ({ item, selected, onToggleSelect, onChange, onDelete, draggable, onDragStart, onDragEnter, onDrop }) => {
+export const EditableProductCard: React.FC<Props> = ({
+  item,
+  selected,
+  onToggleSelect,
+  onChange,
+  onDelete,
+  draggable,
+  onDragStart,
+  onDragEnter,
+  onDrop,
+}) => {
   return (
     <GlassCard
       className="h-full flex flex-col p-0 overflow-hidden"
       draggable={draggable}
-      onDragStart={(e) => { e.dataTransfer.effectAllowed = 'move'; onDragStart?.(item.id); }}
+      onDragStart={(e) => {
+        e.dataTransfer.effectAllowed = "move";
+        onDragStart?.(item.id);
+      }}
       onDragEnter={() => onDragEnter?.(item.id)}
       onDragOver={(e) => e.preventDefault()}
       onDrop={() => onDrop?.(item.id)}
@@ -38,16 +51,22 @@ export const EditableProductCard: React.FC<Props> = ({ item, selected, onToggleS
           draggable={false}
           onContextMenu={(e) => e.preventDefault()}
           style={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            cursor: 'default'
+            maxWidth: "100%",
+            maxHeight: "100%",
+            cursor: "default",
           }}
         />
         {/* Drag handle + select */}
         <div className="absolute top-2 left-2 flex items-center gap-2">
-          <button className="px-2 py-1 text-xs bg-white/10 border border-white/20 rounded text-white cursor-grab">Drag</button>
+          <button className="px-2 py-1 text-xs bg-white/10 border border-white/20 rounded text-white cursor-grab">
+            Drag
+          </button>
           <label className="flex items-center gap-1 text-xs text-white/80 bg-black/40 px-2 py-1 rounded border border-white/10">
-            <input type="checkbox" checked={selected} onChange={() => onToggleSelect(item.id)} />
+            <input
+              type="checkbox"
+              checked={selected}
+              onChange={() => onToggleSelect(item.id)}
+            />
             Select
           </label>
         </div>
@@ -67,7 +86,7 @@ export const EditableProductCard: React.FC<Props> = ({ item, selected, onToggleS
           placeholder="Title"
         />
         <input
-          value={item.description || ''}
+          value={item.description || ""}
           onChange={(e) => onChange(item.id, { description: e.target.value })}
           className="w-full px-3 py-2 rounded bg-black/30 border border-white/15 text-white placeholder-white/40 text-sm"
           placeholder="Subtitle"

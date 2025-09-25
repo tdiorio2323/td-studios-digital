@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,13 +9,23 @@
   --muted: #7e8696;
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.14);
-  --glow: 0 0 1px rgba(255, 255, 255, 0.15), 0 10px 30px rgba(30, 64, 175, 0.12);
+  --glow:
+    0 0 1px rgba(255, 255, 255, 0.15), 0 10px 30px rgba(30, 64, 175, 0.12);
   --rad: 18px;
   --rad-lg: 22px;
 
   --grad: linear-gradient(135deg, #5eead4 0%, #60a5fa 40%, #a78bfa 100%);
-  --grad-dark: radial-gradient(1200px 600px at 80% -10%, rgba(96, 165, 250, 0.12), transparent 60%),
-                radial-gradient(1200px 600px at -10% 110%, rgba(167, 139, 250, 0.1), transparent 55%);
+  --grad-dark:
+    radial-gradient(
+      1200px 600px at 80% -10%,
+      rgba(96, 165, 250, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      1200px 600px at -10% 110%,
+      rgba(167, 139, 250, 0.1),
+      transparent 55%
+    );
 }
 
 html {
@@ -43,7 +53,12 @@ body::before {
     @apply bg-[var(--bg)] text-[15px] md:text-[16px] text-neutral-300 leading-relaxed antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold tracking-tight leading-[0.95] text-white;
   }
 
@@ -78,23 +93,23 @@ body::before {
 
 /* MTV static noise animation */
 @keyframes staticNoise {
-  0% { 
+  0% {
     opacity: 0.1;
     filter: hue-rotate(0deg);
   }
-  25% { 
+  25% {
     opacity: 0.3;
     filter: hue-rotate(90deg);
   }
-  50% { 
+  50% {
     opacity: 0.1;
     filter: hue-rotate(180deg);
   }
-  75% { 
+  75% {
     opacity: 0.25;
     filter: hue-rotate(270deg);
   }
-  100% { 
+  100% {
     opacity: 0.1;
     filter: hue-rotate(360deg);
   }
@@ -102,8 +117,12 @@ body::before {
 
 /* Shared shimmer effect used for the TD Studios wordmark */
 @keyframes shimmerMove {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .shimmer-text {
@@ -119,19 +138,30 @@ body::before {
   background: transparent;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.38), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.2);
   transform: translateZ(0);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
 .glassy-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 24px 50px rgba(15, 23, 42, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .glassy-button:active {
   transform: translateY(-1px);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 14px 30px rgba(15, 23, 42, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .glassy-button__background,
@@ -146,28 +176,48 @@ body::before {
 }
 
 .glassy-button__background {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0.08)
+  );
   opacity: 0.85;
 }
 
 .glassy-button__border {
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.05)
+  );
   mix-blend-mode: screen;
   opacity: 0.7;
 }
 
 .glassy-button__highlight {
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.65), transparent 60%),
-    radial-gradient(circle at 75% 0%, rgba(255, 255, 255, 0.35), transparent 55%),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 255, 255, 0.65),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 75% 0%,
+      rgba(255, 255, 255, 0.35),
+      transparent 55%
+    ),
     linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
   opacity: 0.6;
 }
 
 .glassy-button__glow {
   inset: -40%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 65%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 65%
+  );
   filter: blur(35px);
   opacity: 0.3;
 }
@@ -240,11 +290,31 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(0 0% 18%), hsl(0 0% 4%));
     --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%), hsl(0 0% 0%));
     --gradient-card: linear-gradient(180deg, hsl(0 0% 12%), hsl(0 0% 4%));
-    
-    --gradient-chrome: linear-gradient(135deg, hsl(0 0% 85%), hsl(0 0% 96%), hsl(0 0% 85%));
-    --gradient-platinum: linear-gradient(135deg, hsl(220 15% 70%), hsl(220 15% 88%), hsl(220 15% 78%));
-    --gradient-gold: linear-gradient(135deg, hsl(0 0% 70%), hsl(0 0% 88%), hsl(0 0% 76%));
-    --gradient-emerald: linear-gradient(135deg, hsl(210 12% 28%), hsl(210 16% 18%), hsl(210 20% 12%));
+
+    --gradient-chrome: linear-gradient(
+      135deg,
+      hsl(0 0% 85%),
+      hsl(0 0% 96%),
+      hsl(0 0% 85%)
+    );
+    --gradient-platinum: linear-gradient(
+      135deg,
+      hsl(220 15% 70%),
+      hsl(220 15% 88%),
+      hsl(220 15% 78%)
+    );
+    --gradient-gold: linear-gradient(
+      135deg,
+      hsl(0 0% 70%),
+      hsl(0 0% 88%),
+      hsl(0 0% 76%)
+    );
+    --gradient-emerald: linear-gradient(
+      135deg,
+      hsl(210 12% 28%),
+      hsl(210 16% 18%),
+      hsl(210 20% 12%)
+    );
 
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.08);
     --shadow-md: 0 6px 16px -4px hsl(0 0% 0% / 0.3);
@@ -305,11 +375,31 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(0 0% 12%), hsl(0 0% 2%));
     --gradient-hero: linear-gradient(135deg, hsl(0 0% 2%), hsl(0 0% 0%));
     --gradient-card: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 2%));
-    
-    --gradient-chrome: linear-gradient(135deg, hsl(0 0% 18%), hsl(0 0% 28%), hsl(0 0% 22%));
-    --gradient-platinum: linear-gradient(135deg, hsl(220 12% 28%), hsl(220 12% 36%), hsl(220 12% 32%));
-    --gradient-gold: linear-gradient(135deg, hsl(0 0% 32%), hsl(0 0% 22%), hsl(0 0% 28%));
-    --gradient-emerald: linear-gradient(135deg, hsl(210 14% 20%), hsl(210 18% 14%), hsl(210 20% 10%));
+
+    --gradient-chrome: linear-gradient(
+      135deg,
+      hsl(0 0% 18%),
+      hsl(0 0% 28%),
+      hsl(0 0% 22%)
+    );
+    --gradient-platinum: linear-gradient(
+      135deg,
+      hsl(220 12% 28%),
+      hsl(220 12% 36%),
+      hsl(220 12% 32%)
+    );
+    --gradient-gold: linear-gradient(
+      135deg,
+      hsl(0 0% 32%),
+      hsl(0 0% 22%),
+      hsl(0 0% 28%)
+    );
+    --gradient-emerald: linear-gradient(
+      135deg,
+      hsl(210 14% 20%),
+      hsl(210 18% 14%),
+      hsl(210 20% 10%)
+    );
 
     --shadow-glow: 0 0 28px hsl(0 0% 100% / 0.35);
     --shadow-green: 0 6px 28px hsl(210 12% 10% / 0.35);
@@ -338,15 +428,24 @@ All colors MUST be HSL.
 
 /* Slow spin animation for logos */
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .animate-spin-slow {
   animation: spin-slow 6s linear infinite;
 }
 
 /* force-remove any bounce */
-.animate-bounce, #floatingLogo, .bouncing-logo { animation: none !important; display: none !important; }
+.animate-bounce,
+#floatingLogo,
+.bouncing-logo {
+  animation: none !important;
+  display: none !important;
+}
 
 /* Simple line clamp utilities (no plugin needed) */
 .line-clamp-1 {

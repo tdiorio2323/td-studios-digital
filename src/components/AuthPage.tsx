@@ -15,7 +15,7 @@ interface CustomButton {
 }
 
 interface AuthPageProps {
-  onLogin?: (role: 'customer' | 'brand' | 'admin') => void;
+  onLogin?: (role: "customer" | "brand" | "admin") => void;
   brandLogoSrc?: string; // optional override for centered card logo
   bounceSrc?: string | string[]; // optional override for bouncing background logo
   showBounceOnMobile?: boolean; // if false, hides bouncing logo on mobile
@@ -29,7 +29,20 @@ interface AuthPageProps {
   mainImageSrc?: string; // optional main image in the top box (defaults to TD Hot Tub)
 }
 
-export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile = true, hideAuthForm = false, hideExtraButtons = false, extraImageSrc, bgImageSrc, slideshowImages, slideshowInterval = 1000, customButtons, mainImageSrc }: AuthPageProps) => {
+export const AuthPage = ({
+  onLogin,
+  brandLogoSrc,
+  bounceSrc,
+  showBounceOnMobile = true,
+  hideAuthForm = false,
+  hideExtraButtons = false,
+  extraImageSrc,
+  bgImageSrc,
+  slideshowImages,
+  slideshowInterval = 1000,
+  customButtons,
+  mainImageSrc,
+}: AuthPageProps) => {
   const navigate = useNavigate();
   // Force refresh to clear isSignUp reference error
   const [email, setEmail] = useState("");
@@ -64,12 +77,12 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email) {
       toast({
         title: "Error",
         description: "Please enter your email address",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
@@ -84,76 +97,78 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
       toast({
         title: "Error",
         description: "Please enter your password",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
       // First try to sign in
       let authResult = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      
+
       // If sign in fails, try to sign up
-      if (authResult.error && authResult.error.message.includes('Invalid login credentials')) {
+      if (
+        authResult.error &&
+        authResult.error.message.includes("Invalid login credentials")
+      ) {
         authResult = await supabase.auth.signUp({
           email,
           password,
           options: {
             emailRedirectTo: `${window.location.origin}/`,
-          }
+          },
         });
-        
+
         if (authResult.error) throw authResult.error;
-        
+
         toast({
           title: "Account Created",
           description: "Please check your email to verify your account",
         });
         return;
       }
-      
+
       if (authResult.error) throw authResult.error;
 
       if (authResult.data.user) {
         // Get user role from user_roles table
         const { data: roleData } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', authResult.data.user.id)
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", authResult.data.user.id)
           .maybeSingle();
 
         if (roleData) {
           const userRole = roleData.role;
-          
+
           // Navigate based on role
-          if (userRole === 'admin') {
-            navigate('/admin');
-          } else if (userRole === 'brand') {
-            navigate('/brand');
+          if (userRole === "admin") {
+            navigate("/admin");
+          } else if (userRole === "brand") {
+            navigate("/brand");
           } else {
-            navigate('/shop');
+            navigate("/shop");
           }
-          
+
           // Call onLogin if provided (for backward compatibility)
           if (onLogin) {
             onLogin(userRole);
           }
         } else {
           // Default to customer role if no role found
-          navigate('/shop');
+          navigate("/shop");
         }
       }
-
     } catch (error: any) {
       toast({
         title: "Error",
         description: error.message,
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -161,11 +176,11 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
   };
 
   const handleGoogleAuth = () => {
-    navigate('/shop'); // Mock Google auth
+    navigate("/shop"); // Mock Google auth
   };
 
   const handleAppleAuth = () => {
-    navigate('/shop'); // Mock Apple auth
+    navigate("/shop"); // Mock Apple auth
   };
 
   const brandLogo = brandLogoSrc || "/TD STUDIOS WHITE TEXT.png";
@@ -174,7 +189,7 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       {/* Diamond background */}
       {bgImageSrc && (
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-10"
           style={{ backgroundImage: `url(${bgImageSrc})` }}
         />
@@ -184,9 +199,7 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
       {/* Bouncing logo removed */}
 
       <Card className="w-full max-w-md bg-black/10 border-white/10 shadow-white-glow relative z-20">
-        <CardHeader className="text-center space-y-6">
-          
-        </CardHeader>
+        <CardHeader className="text-center space-y-6"></CardHeader>
 
         <CardContent className="space-y-6">
           {/* Main Image Box */}
@@ -206,7 +219,7 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
                   key={index}
                   variant="chrome"
                   className="w-full h-12 text-2xl font-semibold rounded-xl font-bebas-neue text-black shadow-md"
-                  onClick={() => window.open(button.url, '_blank')}
+                  onClick={() => window.open(button.url, "_blank")}
                 >
                   {button.label}
                 </Button>
@@ -230,7 +243,9 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
                 <Button
                   variant="chrome"
                   className="w-full h-12 text-2xl font-semibold rounded-xl font-bebas-neue text-black shadow-md"
-                  onClick={() => window.open('https://t.me/+mx113PockSVjNzgx', '_blank')}
+                  onClick={() =>
+                    window.open("https://t.me/+mx113PockSVjNzgx", "_blank")
+                  }
                 >
                   CONTACT
                 </Button>
@@ -238,7 +253,7 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
             )}
           </div>
 
-          {(slideshowImages && slideshowImages.length > 0) ? (
+          {slideshowImages && slideshowImages.length > 0 ? (
             <div className="w-full overflow-hidden rounded-xl border border-white/10">
               <img
                 src={slideshowImages[currentSlideIndex]}
@@ -246,11 +261,12 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
                 className="w-full h-[300px] object-cover transition-opacity duration-500"
               />
             </div>
-          ) : extraImageSrc && (
-            extraImageSrc.includes('/a/') ? (
+          ) : (
+            extraImageSrc &&
+            (extraImageSrc.includes("/a/") ? (
               <div className="w-full overflow-hidden rounded-xl border border-white/10">
                 <iframe
-                  src={`${extraImageSrc.replace(/\/?$/, '')}/embed`}
+                  src={`${extraImageSrc.replace(/\/?$/, "")}/embed`}
                   className="w-full h-[300px]"
                   allowFullScreen
                   loading="lazy"
@@ -258,9 +274,13 @@ export const AuthPage = ({ onLogin, brandLogoSrc, bounceSrc, showBounceOnMobile 
               </div>
             ) : (
               <div className="w-full overflow-hidden rounded-xl border border-white/10">
-                <img src={extraImageSrc} alt="promo" className="w-full h-[300px] object-cover" />
+                <img
+                  src={extraImageSrc}
+                  alt="promo"
+                  className="w-full h-[300px] object-cover"
+                />
               </div>
-            )
+            ))
           )}
         </CardContent>
       </Card>

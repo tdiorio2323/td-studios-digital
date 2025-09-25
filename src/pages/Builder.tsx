@@ -4,24 +4,40 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 
 type Variant = "default" | "secondary" | "outline" | "ghost" | "link";
 
-const generateCode = (name: string, title: string, body: string, primary?: { label: string; variant: Variant }, secondary?: { label: string; variant: Variant }) => {
-  const compName = name.replace(/[^a-zA-Z0-9]+/g, " ")
+const generateCode = (
+  name: string,
+  title: string,
+  body: string,
+  primary?: { label: string; variant: Variant },
+  secondary?: { label: string; variant: Variant }
+) => {
+  const compName = name
+    .replace(/[^a-zA-Z0-9]+/g, " ")
     .split(" ")
     .filter(Boolean)
-    .map(s => s[0].toUpperCase() + s.slice(1))
+    .map((s) => s[0].toUpperCase() + s.slice(1))
     .join("");
 
-  const btnImports = (primary || secondary) ? ", Button" : "";
+  const btnImports = primary || secondary ? ", Button" : "";
   const buttons = [
     primary && `<Button variant="${primary.variant}">${primary.label}</Button>`,
-    secondary && `<Button variant="${secondary.variant}">${secondary.label}</Button>`
-  ].filter(Boolean).join("\n            ");
+    secondary &&
+      `<Button variant="${secondary.variant}">${secondary.label}</Button>`,
+  ]
+    .filter(Boolean)
+    .join("\n            ");
 
   return `import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";${btnImports}
@@ -35,7 +51,7 @@ const ${compName} = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">${body || "Scaffolded page."}</p>
-          ${(primary || secondary) ? `<div className="flex gap-2">\n            ${buttons}\n          </div>` : ""}
+          ${primary || secondary ? `<div className="flex gap-2">\n            ${buttons}\n          </div>` : ""}
         </CardContent>
       </Card>
     </div>
@@ -63,20 +79,38 @@ const Builder = () => {
   // Debounced code generation
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCode(generateCode(
-        name,
-        title,
-        body,
-        includePrimary ? { label: pLabel, variant: pVariant } : undefined,
-        includeSecondary ? { label: sLabel, variant: sVariant } : undefined,
-      ));
+      setCode(
+        generateCode(
+          name,
+          title,
+          body,
+          includePrimary ? { label: pLabel, variant: pVariant } : undefined,
+          includeSecondary ? { label: sLabel, variant: sVariant } : undefined
+        )
+      );
     }, 150);
-    
+
     return () => clearTimeout(timer);
-  }, [name, title, body, includePrimary, includeSecondary, pLabel, pVariant, sLabel, sVariant]);
+  }, [
+    name,
+    title,
+    body,
+    includePrimary,
+    includeSecondary,
+    pLabel,
+    pVariant,
+    sLabel,
+    sVariant,
+  ]);
 
   // Valid button variants for selects
-  const variants: Variant[] = ["default", "secondary", "outline", "ghost", "link"];
+  const variants: Variant[] = [
+    "default",
+    "secondary",
+    "outline",
+    "ghost",
+    "link",
+  ];
 
   const createPage = async () => {
     try {
@@ -88,13 +122,20 @@ const Builder = () => {
       if (!res.ok) throw new Error(await res.text());
       toast({ title: "Page created", description: `${name} -> ${route}` });
     } catch (e: unknown) {
-      toast({ title: "Error", description: e instanceof Error ? e.message : "Unknown error", variant: "destructive" });
+      toast({
+        title: "Error",
+        description: e instanceof Error ? e.message : "Unknown error",
+        variant: "destructive",
+      });
     }
   };
 
   const copyCode = async () => {
     await navigator.clipboard.writeText(code);
-    toast({ title: "Copied", description: "Component code copied to clipboard." });
+    toast({
+      title: "Copied",
+      description: "Component code copied to clipboard.",
+    });
   };
 
   return (
@@ -107,21 +148,33 @@ const Builder = () => {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Name (Component)</Label>
-              <Input value={name} onChange={e => setName(e.target.value)} placeholder="About" />
+              <Input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="About"
+              />
             </div>
             <div className="space-y-2">
               <Label>Route</Label>
-              <Input value={route} onChange={e => setRoute(e.target.value)} placeholder="/about" />
+              <Input
+                value={route}
+                onChange={(e) => setRoute(e.target.value)}
+                placeholder="/about"
+              />
             </div>
           </div>
 
           <div className="space-y-2">
             <Label>Title</Label>
-            <Input value={title} onChange={e => setTitle(e.target.value)} />
+            <Input value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label>Body</Label>
-            <Textarea value={body} onChange={e => setBody(e.target.value)} rows={4} />
+            <Textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              rows={4}
+            />
           </div>
 
           <Separator />
@@ -129,14 +182,29 @@ const Builder = () => {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label>Primary Button</Label>
-                <input type="checkbox" checked={includePrimary} onChange={e => setIncludePrimary(e.target.checked)} />
+                <input
+                  type="checkbox"
+                  checked={includePrimary}
+                  onChange={(e) => setIncludePrimary(e.target.checked)}
+                />
               </div>
-              <Input value={pLabel} onChange={e => setPLabel(e.target.value)} disabled={!includePrimary} />
-              <Select value={pVariant} onValueChange={(v: Variant) => setPVariant(v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+              <Input
+                value={pLabel}
+                onChange={(e) => setPLabel(e.target.value)}
+                disabled={!includePrimary}
+              />
+              <Select
+                value={pVariant}
+                onValueChange={(v: Variant) => setPVariant(v)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
-                  {variants.map(v => (
-                    <SelectItem key={v} value={v}>{v}</SelectItem>
+                  {variants.map((v) => (
+                    <SelectItem key={v} value={v}>
+                      {v}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -144,14 +212,29 @@ const Builder = () => {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label>Secondary Button</Label>
-                <input type="checkbox" checked={includeSecondary} onChange={e => setIncludeSecondary(e.target.checked)} />
+                <input
+                  type="checkbox"
+                  checked={includeSecondary}
+                  onChange={(e) => setIncludeSecondary(e.target.checked)}
+                />
               </div>
-              <Input value={sLabel} onChange={e => setSLabel(e.target.value)} disabled={!includeSecondary} />
-              <Select value={sVariant} onValueChange={(v: Variant) => setSVariant(v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+              <Input
+                value={sLabel}
+                onChange={(e) => setSLabel(e.target.value)}
+                disabled={!includeSecondary}
+              />
+              <Select
+                value={sVariant}
+                onValueChange={(v: Variant) => setSVariant(v)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
-                  {variants.map(v => (
-                    <SelectItem key={v} value={v}>{v}</SelectItem>
+                  {variants.map((v) => (
+                    <SelectItem key={v} value={v}>
+                      {v}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -160,7 +243,9 @@ const Builder = () => {
 
           <div className="flex gap-2">
             <Button onClick={copyCode}>Copy Code</Button>
-            <Button variant="secondary" onClick={createPage}>Create Page</Button>
+            <Button variant="secondary" onClick={createPage}>
+              Create Page
+            </Button>
           </div>
         </CardContent>
       </Card>
@@ -173,12 +258,18 @@ const Builder = () => {
           {/* Simple live preview */}
           <div className="min-h-[300px] p-4 border rounded-md">
             <Card>
-              <CardHeader><CardTitle>{title || name}</CardTitle></CardHeader>
+              <CardHeader>
+                <CardTitle>{title || name}</CardTitle>
+              </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground">{body}</p>
                 <div className="flex gap-2">
-                  {includePrimary && <Button variant={pVariant}>{pLabel}</Button>}
-                  {includeSecondary && <Button variant={sVariant}>{sLabel}</Button>}
+                  {includePrimary && (
+                    <Button variant={pVariant}>{pLabel}</Button>
+                  )}
+                  {includeSecondary && (
+                    <Button variant={sVariant}>{sLabel}</Button>
+                  )}
                 </div>
               </CardContent>
             </Card>

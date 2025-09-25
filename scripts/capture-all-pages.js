@@ -1,74 +1,74 @@
-import { chromium } from 'playwright';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { chromium } from "playwright";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const routes = [
   // CoreLayout Routes (TD Studios Main Site)
-  { path: '/', name: 'home' },
-  { path: '/shop', name: 'shop' },
-  { path: '/mylar-designs', name: 'mylar-designs' },
-  { path: '/custom-designs', name: 'custom-designs' },
-  { path: '/social-content', name: 'social-content' },
-  { path: '/digital-assets', name: 'digital-assets' },
-  { path: '/custom-mylar-form', name: 'custom-mylar-form' },
-  { path: '/custom-websites', name: 'custom-websites' },
-  { path: '/referral', name: 'referral' },
-  { path: '/contact', name: 'contact' },
-  { path: '/checkout', name: 'checkout' },
+  { path: "/", name: "home" },
+  { path: "/shop", name: "shop" },
+  { path: "/mylar-designs", name: "mylar-designs" },
+  { path: "/custom-designs", name: "custom-designs" },
+  { path: "/social-content", name: "social-content" },
+  { path: "/digital-assets", name: "digital-assets" },
+  { path: "/custom-mylar-form", name: "custom-mylar-form" },
+  { path: "/custom-websites", name: "custom-websites" },
+  { path: "/referral", name: "referral" },
+  { path: "/contact", name: "contact" },
+  { path: "/checkout", name: "checkout" },
 
   // Standalone Routes
-  { path: '/admin', name: 'admin' },
-  { path: '/brand', name: 'brand' },
-  { path: '/auth', name: 'auth' },
+  { path: "/admin", name: "admin" },
+  { path: "/brand", name: "brand" },
+  { path: "/auth", name: "auth" },
 
   // Brand Routes
-  { path: '/tdstudios', name: 'tdstudios' },
-  { path: '/bagman_ny', name: 'bagman-ny' },
-  { path: '/mbdesigns', name: 'mbdesigns' },
-  { path: '/tddesigns', name: 'tddesigns' },
-  { path: '/quickprintz', name: 'quickprintz' },
-  { path: '/quickprintz/form', name: 'quickprintz-form' },
-  { path: '/katya', name: 'katya' },
-  { path: '/karol', name: 'karol' },
-  { path: '/luci', name: 'luci' },
-  { path: '/willow', name: 'willow' },
-  { path: '/eldondolla', name: 'eldondolla' },
-  { path: '/bagmanform', name: 'bagmanform' },
-  { path: '/show', name: 'show' },
+  { path: "/tdstudios", name: "tdstudios" },
+  { path: "/bagman_ny", name: "bagman-ny" },
+  { path: "/mbdesigns", name: "mbdesigns" },
+  { path: "/tddesigns", name: "tddesigns" },
+  { path: "/quickprintz", name: "quickprintz" },
+  { path: "/quickprintz/form", name: "quickprintz-form" },
+  { path: "/katya", name: "katya" },
+  { path: "/karol", name: "karol" },
+  { path: "/luci", name: "luci" },
+  { path: "/willow", name: "willow" },
+  { path: "/eldondolla", name: "eldondolla" },
+  { path: "/bagmanform", name: "bagmanform" },
+  { path: "/show", name: "show" },
 
   // Developer Routes
-  { path: '/__builder', name: 'builder' },
-  { path: '/__auth-builder', name: 'auth-builder' },
-  { path: '/__card-editor', name: 'card-editor' },
-  { path: '/__components', name: 'components' },
+  { path: "/__builder", name: "builder" },
+  { path: "/__auth-builder", name: "auth-builder" },
+  { path: "/__card-editor", name: "card-editor" },
+  { path: "/__components", name: "components" },
 ];
 
 async function captureScreenshots() {
   const browser = await chromium.launch();
   const context = await browser.newContext({
-    viewport: { width: 1920, height: 1080 }
+    viewport: { width: 1920, height: 1080 },
   });
 
   // Create screenshots directory
-  const screenshotsDir = path.join(__dirname, '..', 'screenshots');
+  const screenshotsDir = path.join(__dirname, "..", "screenshots");
   if (!fs.existsSync(screenshotsDir)) {
     fs.mkdirSync(screenshotsDir);
   }
 
   // Create mobile screenshots directory
-  const mobileDir = path.join(screenshotsDir, 'mobile');
+  const mobileDir = path.join(screenshotsDir, "mobile");
   if (!fs.existsSync(mobileDir)) {
     fs.mkdirSync(mobileDir);
   }
 
   const page = await context.newPage();
-  const baseUrl = 'http://localhost:8082';
+  const baseUrl = "http://localhost:8082";
 
-  console.log('Starting screenshot capture...');
+  console.log("Starting screenshot capture...");
 
   for (const route of routes) {
     try {
@@ -76,11 +76,11 @@ async function captureScreenshots() {
 
       // Desktop screenshot
       await page.setViewportSize({ width: 1920, height: 1080 });
-      await page.goto(`${baseUrl}${route.path}`, { waitUntil: 'networkidle' });
+      await page.goto(`${baseUrl}${route.path}`, { waitUntil: "networkidle" });
       await page.waitForTimeout(2000); // Wait for animations
       await page.screenshot({
         path: path.join(screenshotsDir, `${route.name}.png`),
-        fullPage: true
+        fullPage: true,
       });
 
       // Mobile screenshot
@@ -88,16 +88,15 @@ async function captureScreenshots() {
       await page.waitForTimeout(1000);
       await page.screenshot({
         path: path.join(mobileDir, `${route.name}-mobile.png`),
-        fullPage: true
+        fullPage: true,
       });
-
     } catch (error) {
       console.error(`Error capturing ${route.name}: ${error.message}`);
     }
   }
 
   await browser.close();
-  console.log('Screenshot capture complete!');
+  console.log("Screenshot capture complete!");
   console.log(`Screenshots saved to: ${screenshotsDir}`);
 }
 
@@ -143,7 +142,24 @@ function generateIndex() {
         <div class="section">
             <h2>CoreLayout Routes (TD Studios Main Site)</h2>
             <div class="grid">
-                ${routes.filter(r => ['/', '/shop', '/mylar-designs', '/custom-designs', '/social-content', '/digital-assets', '/custom-mylar-form', '/custom-websites', '/referral', '/contact', '/checkout'].includes(r.path)).map(route => `
+                ${routes
+                  .filter((r) =>
+                    [
+                      "/",
+                      "/shop",
+                      "/mylar-designs",
+                      "/custom-designs",
+                      "/social-content",
+                      "/digital-assets",
+                      "/custom-mylar-form",
+                      "/custom-websites",
+                      "/referral",
+                      "/contact",
+                      "/checkout",
+                    ].includes(r.path)
+                  )
+                  .map(
+                    (route) => `
                 <div class="card">
                     <img class="desktop-img" src="screenshots/${route.name}.png" alt="${route.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
                     <img class="mobile-img" src="screenshots/mobile/${route.name}-mobile.png" alt="${route.name}" style="display:none;" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
@@ -152,14 +168,19 @@ function generateIndex() {
                         <p><a href="http://localhost:8082${route.path}" target="_blank" style="color: #888;">http://localhost:8082${route.path}</a></p>
                     </div>
                 </div>
-                `).join('')}
+                `
+                  )
+                  .join("")}
             </div>
         </div>
 
         <div class="section">
             <h2>Standalone Routes</h2>
             <div class="grid">
-                ${routes.filter(r => ['/admin', '/brand', '/auth'].includes(r.path)).map(route => `
+                ${routes
+                  .filter((r) => ["/admin", "/brand", "/auth"].includes(r.path))
+                  .map(
+                    (route) => `
                 <div class="card">
                     <img class="desktop-img" src="screenshots/${route.name}.png" alt="${route.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
                     <img class="mobile-img" src="screenshots/mobile/${route.name}-mobile.png" alt="${route.name}" style="display:none;" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
@@ -168,14 +189,35 @@ function generateIndex() {
                         <p><a href="http://localhost:8082${route.path}" target="_blank" style="color: #888;">http://localhost:8082${route.path}</a></p>
                     </div>
                 </div>
-                `).join('')}
+                `
+                  )
+                  .join("")}
             </div>
         </div>
 
         <div class="section">
             <h2>Brand Pages</h2>
             <div class="grid">
-                ${routes.filter(r => ['/tdstudios', '/bagman_ny', '/mbdesigns', '/tddesigns', '/quickprintz', '/quickprintz/form', '/katya', '/karol', '/luci', '/willow', '/eldondolla', '/bagmanform', '/show'].includes(r.path)).map(route => `
+                ${routes
+                  .filter((r) =>
+                    [
+                      "/tdstudios",
+                      "/bagman_ny",
+                      "/mbdesigns",
+                      "/tddesigns",
+                      "/quickprintz",
+                      "/quickprintz/form",
+                      "/katya",
+                      "/karol",
+                      "/luci",
+                      "/willow",
+                      "/eldondolla",
+                      "/bagmanform",
+                      "/show",
+                    ].includes(r.path)
+                  )
+                  .map(
+                    (route) => `
                 <div class="card">
                     <img class="desktop-img" src="screenshots/${route.name}.png" alt="${route.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
                     <img class="mobile-img" src="screenshots/mobile/${route.name}-mobile.png" alt="${route.name}" style="display:none;" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
@@ -184,14 +226,26 @@ function generateIndex() {
                         <p><a href="http://localhost:8082${route.path}" target="_blank" style="color: #888;">http://localhost:8082${route.path}</a></p>
                     </div>
                 </div>
-                `).join('')}
+                `
+                  )
+                  .join("")}
             </div>
         </div>
 
         <div class="section">
             <h2>Developer Tools</h2>
             <div class="grid">
-                ${routes.filter(r => ['/__builder', '/__auth-builder', '/__card-editor', '/__components'].includes(r.path)).map(route => `
+                ${routes
+                  .filter((r) =>
+                    [
+                      "/__builder",
+                      "/__auth-builder",
+                      "/__card-editor",
+                      "/__components",
+                    ].includes(r.path)
+                  )
+                  .map(
+                    (route) => `
                 <div class="card">
                     <img class="desktop-img" src="screenshots/${route.name}.png" alt="${route.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
                     <img class="mobile-img" src="screenshots/mobile/${route.name}-mobile.png" alt="${route.name}" style="display:none;" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
@@ -200,7 +254,9 @@ function generateIndex() {
                         <p><a href="http://localhost:8082${route.path}" target="_blank" style="color: #888;">http://localhost:8082${route.path}</a></p>
                     </div>
                 </div>
-                `).join('')}
+                `
+                  )
+                  .join("")}
             </div>
         </div>
     </div>
@@ -226,7 +282,7 @@ function generateIndex() {
 </html>
   `;
 
-  const indexPath = path.join(__dirname, '..', 'screenshots', 'index.html');
+  const indexPath = path.join(__dirname, "..", "screenshots", "index.html");
   fs.writeFileSync(indexPath, html);
   console.log(`Index file created: ${indexPath}`);
 }

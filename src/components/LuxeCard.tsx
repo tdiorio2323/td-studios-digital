@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 interface LuxeCardProps {
   title: string;
@@ -9,18 +9,26 @@ interface LuxeCardProps {
   bullets?: string[];
 }
 
-export function LuxeCard({ title, children, className, icons, bullets }: LuxeCardProps) {
+export function LuxeCard({
+  title,
+  children,
+  className,
+  icons,
+  bullets,
+}: LuxeCardProps) {
   return (
     <div
       className={cn(
-        'group relative flex flex-col rounded-2xl p-5',
-        'bg-surface/70 supports-[backdrop-filter]:backdrop-blur border border-white/10 shadow-card',
-        'before:absolute before:inset-px before:rounded-[calc(var(--rad)-1px)] before:bg-gradient-to-b before:from-white/6 before:to-transparent before:opacity-0 before:transition-opacity group-hover:before:opacity-100',
-        'transition-transform duration-150 ease-out hover:-translate-y-0.5',
+        "group relative flex flex-col rounded-2xl p-5",
+        "bg-surface/70 supports-[backdrop-filter]:backdrop-blur border border-white/10 shadow-card",
+        "before:absolute before:inset-px before:rounded-[calc(var(--rad)-1px)] before:bg-gradient-to-b before:from-white/6 before:to-transparent before:opacity-0 before:transition-opacity group-hover:before:opacity-100",
+        "transition-transform duration-150 ease-out hover:-translate-y-0.5",
         className
       )}
     >
-      <h3 className="text-white/90 text-[17px] font-semibold tracking-tight">{title}</h3>
+      <h3 className="text-white/90 text-[17px] font-semibold tracking-tight">
+        {title}
+      </h3>
       {children && (
         <div className="mt-3 text-[15px] leading-relaxed text-neutral-300">
           {children}

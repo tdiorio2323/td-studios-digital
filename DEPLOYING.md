@@ -9,9 +9,9 @@ One-command options
   - `vercel --prod`
 
 - Deploy Hook (no CLI needed):
-  1) In Vercel → Project → Settings → Git → Deploy Hooks → Create Hook (Production)
-  2) Copy the hook URL into `.env.local` as `VERCEL_DEPLOY_HOOK_URL=`
-  3) Run `npm run deploy:hook`
+  1. In Vercel → Project → Settings → Git → Deploy Hooks → Create Hook (Production)
+  2. Copy the hook URL into `.env.local` as `VERCEL_DEPLOY_HOOK_URL=`
+  3. Run `npm run deploy:hook`
 
 Environment variables
 
@@ -49,10 +49,10 @@ Integrating n8n
     - `N8N_BASIC_USER` and `N8N_BASIC_PASS` for Basic Auth.
 - From the frontend, POST to `/api/n8n-proxy`:
   ```ts
-  fetch('/api/n8n-proxy', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ event: 'contact.submit', data: formValues })
-  })
+  fetch("/api/n8n-proxy", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ event: "contact.submit", data: formValues }),
+  });
   ```
 - Redeploy after adding env vars to activate the proxy.

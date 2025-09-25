@@ -38,7 +38,12 @@ export const AutoSliderBanner: React.FC = () => {
             key={src}
             className={`absolute inset-0 transition-opacity duration-1000 ${index === currentIndex ? "opacity-100" : "opacity-0"}`}
           >
-            <img src={src} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" loading={index === 0 ? "eager" : "lazy"} />
+            <img
+              src={src}
+              alt={`Banner ${index + 1}`}
+              className="w-full h-full object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
           </div>
         ))
       )}
@@ -50,7 +55,9 @@ export const AutoSliderBanner: React.FC = () => {
           <span className="block md:inline md:ml-4">STRATEGY</span>
           <span className="block md:inline md:ml-4">CREATIVITY</span>
         </h1>
-        <p className="text-2xl font-semibold tracking-tight text-white md:text-3xl mb-8">All in one place</p>
+        <p className="text-2xl font-semibold tracking-tight text-white md:text-3xl mb-8">
+          All in one place
+        </p>
       </div>
     </div>
   );

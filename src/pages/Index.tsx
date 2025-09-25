@@ -11,48 +11,50 @@ const Index = () => {
       if (session) {
         // Get user role from users table
         supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', session.user.id)
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id)
           .maybeSingle()
           .then(({ data }) => {
             if (data) {
-              if (data.role === 'admin') {
-                navigate('/admin');
-              } else if (data.role === 'brand') {
-                navigate('/brand');
+              if (data.role === "admin") {
+                navigate("/admin");
+              } else if (data.role === "brand") {
+                navigate("/brand");
               } else {
-                navigate('/shop');
+                navigate("/shop");
               }
             }
           });
       } else {
         // No session, redirect to auth
-        navigate('/auth');
+        navigate("/auth");
       }
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN" && session) {
         supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', session.user.id)
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id)
           .maybeSingle()
           .then(({ data }) => {
             if (data) {
-              if (data.role === 'admin') {
-                navigate('/admin');
-              } else if (data.role === 'brand') {
-                navigate('/brand');
+              if (data.role === "admin") {
+                navigate("/admin");
+              } else if (data.role === "brand") {
+                navigate("/brand");
               } else {
-                navigate('/shop');
+                navigate("/shop");
               }
             }
           });
-      } else if (event === 'SIGNED_OUT') {
-        navigate('/auth');
+      } else if (event === "SIGNED_OUT") {
+        navigate("/auth");
       }
     });
 

@@ -1,0 +1,8 @@
+# Bundle Size Report
+
+## Build Artifacts
+1.0M index-CjzpUXM8.js
+124K index-CLBTHHW-.css
+
+## Total Dist Size
+120M	dist/

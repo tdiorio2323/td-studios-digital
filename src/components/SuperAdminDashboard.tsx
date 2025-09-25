@@ -1,27 +1,40 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { supabase } from "@/supabase/client";
 import { toast } from "sonner";
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  LineChart, 
-  Line, 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  LineChart,
+  Line,
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell 
+  Cell,
 } from "recharts";
 import {
   Users,
@@ -41,7 +54,7 @@ import {
   Activity,
   Package,
   Eye,
-  LogOut
+  LogOut,
 } from "lucide-react";
 
 const SuperAdminDashboard = () => {
@@ -51,10 +64,10 @@ const SuperAdminDashboard = () => {
   const handleLogout = async () => {
     try {
       await supabase.auth.signOut();
-      navigate('/auth');
-      toast.success('Logged out successfully');
+      navigate("/auth");
+      toast.success("Logged out successfully");
     } catch (error) {
-      toast.error('Error logging out');
+      toast.error("Error logging out");
     }
   };
 
@@ -63,22 +76,53 @@ const SuperAdminDashboard = () => {
     totalUsers: 2847,
     activeBrands: 156,
     totalRevenue: 458600,
-    monthlyGrowth: 23.5
+    monthlyGrowth: 23.5,
   };
 
   const recentBrands = [
-    { id: 1, name: "Green Valley Cannabis", email: "contact@greenvalley.com", status: "pending", applied: "2024-01-25", revenue: 12500 },
-    { id: 2, name: "High Quality Herbs", email: "info@hqherbs.com", status: "active", applied: "2024-01-20", revenue: 28900 },
-    { id: 3, name: "Cannabis Craft Co", email: "hello@cannabiscraft.com", status: "pending", applied: "2024-01-22", revenue: 0 },
-    { id: 4, name: "Pure Cannabis", email: "support@purecannabis.com", status: "active", applied: "2024-01-18", revenue: 45200 }
+    {
+      id: 1,
+      name: "Green Valley Cannabis",
+      email: "contact@greenvalley.com",
+      status: "pending",
+      applied: "2024-01-25",
+      revenue: 12500,
+    },
+    {
+      id: 2,
+      name: "High Quality Herbs",
+      email: "info@hqherbs.com",
+      status: "active",
+      applied: "2024-01-20",
+      revenue: 28900,
+    },
+    {
+      id: 3,
+      name: "Cannabis Craft Co",
+      email: "hello@cannabiscraft.com",
+      status: "pending",
+      applied: "2024-01-22",
+      revenue: 0,
+    },
+    {
+      id: 4,
+      name: "Pure Cannabis",
+      email: "support@purecannabis.com",
+      status: "active",
+      applied: "2024-01-18",
+      revenue: 45200,
+    },
   ];
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
+    const variants: Record<
+      string,
+      "default" | "secondary" | "destructive" | "outline"
+    > = {
       active: "default",
       pending: "secondary",
       suspended: "destructive",
-      inactive: "outline"
+      inactive: "outline",
     };
     return <Badge variant={variants[status] || "outline"}>{status}</Badge>;
   };
@@ -105,7 +149,11 @@ const SuperAdminDashboard = () => {
       </div>
 
       <div className="flex-1 space-y-6 p-6">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="space-y-6"
+        >
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="brands">Brands</TabsTrigger>
@@ -117,24 +165,33 @@ const SuperAdminDashboard = () => {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Total Users
+                  </CardTitle>
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{platformStats.totalUsers.toLocaleString()}</div>
+                  <div className="text-2xl font-bold">
+                    {platformStats.totalUsers.toLocaleString()}
+                  </div>
                   <p className="text-xs text-muted-foreground">
-                    <span className="text-emerald-500">+12.3%</span> from last month
+                    <span className="text-emerald-500">+12.3%</span> from last
+                    month
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Active Brands</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Active Brands
+                  </CardTitle>
                   <Building2 className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{platformStats.activeBrands}</div>
+                  <div className="text-2xl font-bold">
+                    {platformStats.activeBrands}
+                  </div>
                   <p className="text-xs text-muted-foreground">
                     <span className="text-emerald-500">+8 new</span> this month
                   </p>
@@ -143,25 +200,38 @@ const SuperAdminDashboard = () => {
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Platform Revenue</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Platform Revenue
+                  </CardTitle>
                   <DollarSign className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">${platformStats.totalRevenue.toLocaleString()}</div>
+                  <div className="text-2xl font-bold">
+                    ${platformStats.totalRevenue.toLocaleString()}
+                  </div>
                   <p className="text-xs text-muted-foreground">
-                    <span className="text-emerald-500">+{platformStats.monthlyGrowth}%</span> from last month
+                    <span className="text-emerald-500">
+                      +{platformStats.monthlyGrowth}%
+                    </span>{" "}
+                    from last month
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Growth Rate</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Growth Rate
+                  </CardTitle>
                   <TrendingUp className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{platformStats.monthlyGrowth}%</div>
-                  <p className="text-xs text-muted-foreground">Monthly growth rate</p>
+                  <div className="text-2xl font-bold">
+                    {platformStats.monthlyGrowth}%
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Monthly growth rate
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -198,7 +268,9 @@ const SuperAdminDashboard = () => {
                   <TableBody>
                     {recentBrands.map((brand) => (
                       <TableRow key={brand.id}>
-                        <TableCell className="font-medium">{brand.name}</TableCell>
+                        <TableCell className="font-medium">
+                          {brand.name}
+                        </TableCell>
                         <TableCell>{brand.email}</TableCell>
                         <TableCell>{getStatusBadge(brand.status)}</TableCell>
                         <TableCell>{brand.applied}</TableCell>
@@ -225,7 +297,10 @@ const SuperAdminDashboard = () => {
             <h2 className="text-2xl font-bold">User Management</h2>
             <Card>
               <CardContent className="p-6">
-                <p className="text-muted-foreground">User management interface with search, filters, and bulk actions.</p>
+                <p className="text-muted-foreground">
+                  User management interface with search, filters, and bulk
+                  actions.
+                </p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -234,7 +309,9 @@ const SuperAdminDashboard = () => {
             <h2 className="text-2xl font-bold">Platform Analytics</h2>
             <Card>
               <CardContent className="p-6">
-                <p className="text-muted-foreground">Comprehensive analytics dashboard with charts and insights.</p>
+                <p className="text-muted-foreground">
+                  Comprehensive analytics dashboard with charts and insights.
+                </p>
               </CardContent>
             </Card>
           </TabsContent>

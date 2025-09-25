@@ -26,24 +26,31 @@ export const AuthCard: React.FC<AuthCardProps> = ({
   image,
   bgImage,
   buttons,
-  className = ""
+  className = "",
 }) => {
-  const backgroundStyle = bgImage ? {
-    backgroundImage: `url(${bgImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  } : {};
+  const backgroundStyle = bgImage
+    ? {
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }
+    : {};
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={backgroundStyle}>
+    <div
+      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      style={backgroundStyle}
+    >
       {/* Background overlay */}
       <div className="absolute inset-0 bg-black/40" />
-      
+
       {/* Glassmorphism card */}
-      <Card className={`w-full max-w-md bg-black/10 border-white/10 shadow-white-glow backdrop-blur-md relative z-20 ${className}`}>
+      <Card
+        className={`w-full max-w-md bg-black/10 border-white/10 shadow-white-glow backdrop-blur-md relative z-20 ${className}`}
+      >
         <CardHeader className="text-center space-y-6">
           <div className="flex items-center justify-center">
-            <img 
+            <img
               src={image}
               alt={title}
               className="h-24 w-24 rounded-full border-4 border-white/20 shadow-lg object-cover"
@@ -61,7 +68,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
               key={index}
               variant="chrome"
               className="w-full h-12 text-2xl font-semibold rounded-xl font-bebas-neue text-black shadow-md"
-              onClick={() => window.open(button.url, '_blank')}
+              onClick={() => window.open(button.url, "_blank")}
             >
               {button.label}
             </Button>

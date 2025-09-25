@@ -1,0 +1,49 @@
+
+/Users/tylerdiorio/tdstudioscannamenu-22
+├── .DS_Store
+├── .git
+├── .gitattributes
+├── .gitattributes.bak
+├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+├── DEPLOYING.md
+├── LuicianaPage.tsx
+├── PROJECT_TREE.txt
+├── README-AUTH-CARDS.md
+├── README-luiciana.md
+├── README.md
+├── REPLACE
+├── api
+├── audit-nav.cjs
+├── components.json
+├── deploy_link_pages.sh
+├── eslint.config.js
+├── index.html
+├── lucipic.jpg
+├── luiciana-index.html
+├── nav-report
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── process_psd.py
+├── public
+├── screenshots
+├── scripts
+├── setup_mass_production.sh
+├── src
+├── supabase
+├── tailwind.config.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vercel.json
+├── visdedupe.py
+├── visdedupe_report.html
+└── vite.config.ts
+
+directory: 9 file: 32
+
+
+
+[2K[1G

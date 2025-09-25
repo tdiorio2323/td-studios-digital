@@ -1,9 +1,9 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { neon } from '@neondatabase/serverless';
+import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { neon } from "@neondatabase/serverless";
 
 function getDb() {
   const url = process.env.POSTGRES_URL || process.env.DATABASE_URL;
-  if (!url) throw new Error('Missing POSTGRES_URL/DATABASE_URL');
+  if (!url) throw new Error("Missing POSTGRES_URL/DATABASE_URL");
   return neon(url);
 }
 
@@ -20,27 +20,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const sql = getDb();
     await ensureTable(sql);
 
-    if (req.method === 'POST') {
+    if (req.method === "POST") {
       const { comment } = (req.body || {}) as { comment?: string };
-      if (!comment || typeof comment !== 'string') {
-        return res.status(400).json({ error: 'Missing comment' });
+      if (!comment || typeof comment !== "string") {
+        return res.status(400).json({ error: "Missing comment" });
       }
-      const rows = await sql`INSERT INTO comments (comment) VALUES (${comment}) RETURNING id, comment, created_at`;
+      const rows =
+        await sql`INSERT INTO comments (comment) VALUES (${comment}) RETURNING id, comment, created_at`;
       return res.status(201).json(rows[0]);
     }
 
-    if (req.method === 'GET') {
-      const rows = await sql`SELECT id, comment, created_at FROM comments ORDER BY created_at DESC LIMIT 100`;
+    if (req.method === "GET") {
+      const rows =
+        await sql`SELECT id, comment, created_at FROM comments ORDER BY created_at DESC LIMIT 100`;
       return res.status(200).json({ items: rows });
     }
 
-    if (req.method === 'OPTIONS') {
+    if (req.method === "OPTIONS") {
       return res.status(204).end();
     }
 
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: "Method not allowed" });
   } catch (e: any) {
-    return res.status(500).json({ error: 'DB error', message: e?.message || String(e) });
+    return res
+      .status(500)
+      .json({ error: "DB error", message: e?.message || String(e) });
   }
 }
-

@@ -4,33 +4,99 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
 const cardTypes = [
-  { id: "minimal", label: "Minimal Card", description: "Clean and simple design" },
-  { id: "modern", label: "Modern Card", description: "Contemporary styling with gradients" },
-  { id: "glassmorphism", label: "Glass Card", description: "Translucent glass effect" },
-  { id: "neumorphism", label: "Soft Card", description: "Soft shadowed design" },
+  {
+    id: "minimal",
+    label: "Minimal Card",
+    description: "Clean and simple design",
+  },
+  {
+    id: "modern",
+    label: "Modern Card",
+    description: "Contemporary styling with gradients",
+  },
+  {
+    id: "glassmorphism",
+    label: "Glass Card",
+    description: "Translucent glass effect",
+  },
+  {
+    id: "neumorphism",
+    label: "Soft Card",
+    description: "Soft shadowed design",
+  },
   { id: "neon", label: "Neon Card", description: "Bright neon accents" },
   { id: "retro", label: "Retro Card", description: "Vintage inspired design" },
-  { id: "corporate", label: "Corporate Card", description: "Professional business style" },
-  { id: "creative", label: "Creative Card", description: "Artistic and unique" },
+  {
+    id: "corporate",
+    label: "Corporate Card",
+    description: "Professional business style",
+  },
+  {
+    id: "creative",
+    label: "Creative Card",
+    description: "Artistic and unique",
+  },
   { id: "dark", label: "Dark Theme Card", description: "Dark mode design" },
-  { id: "colorful", label: "Colorful Card", description: "Vibrant color schemes" }
+  {
+    id: "colorful",
+    label: "Colorful Card",
+    description: "Vibrant color schemes",
+  },
 ];
 
 const backgroundTypes = [
   { id: "solid", label: "Solid Color", description: "Single color background" },
-  { id: "gradient", label: "Gradient", description: "Color transition background" },
-  { id: "image", label: "Custom Image", description: "Your own background image" },
-  { id: "pattern", label: "Pattern", description: "Geometric or decorative patterns" },
-  { id: "video", label: "Video Background", description: "Animated video background" },
-  { id: "animated", label: "Animated Gradient", description: "Moving color transitions" },
-  { id: "minimal", label: "Minimal", description: "Clean white/light background" },
+  {
+    id: "gradient",
+    label: "Gradient",
+    description: "Color transition background",
+  },
+  {
+    id: "image",
+    label: "Custom Image",
+    description: "Your own background image",
+  },
+  {
+    id: "pattern",
+    label: "Pattern",
+    description: "Geometric or decorative patterns",
+  },
+  {
+    id: "video",
+    label: "Video Background",
+    description: "Animated video background",
+  },
+  {
+    id: "animated",
+    label: "Animated Gradient",
+    description: "Moving color transitions",
+  },
+  {
+    id: "minimal",
+    label: "Minimal",
+    description: "Clean white/light background",
+  },
   { id: "nature", label: "Nature", description: "Natural scenery backgrounds" },
-  { id: "abstract", label: "Abstract", description: "Artistic abstract designs" },
-  { id: "space", label: "Space/Galaxy", description: "Cosmic themed backgrounds" }
+  {
+    id: "abstract",
+    label: "Abstract",
+    description: "Artistic abstract designs",
+  },
+  {
+    id: "space",
+    label: "Space/Galaxy",
+    description: "Cosmic themed backgrounds",
+  },
 ];
 
 const Form = () => {
@@ -40,13 +106,13 @@ const Form = () => {
     name: "",
     email: "",
     phone: "",
-    
+
     // Page content
     title: "",
     username: "",
     subtitle: "",
     picture: "",
-    
+
     // Links (up to 7)
     links: [
       { label: "", url: "" },
@@ -55,25 +121,25 @@ const Form = () => {
       { label: "", url: "" },
       { label: "", url: "" },
       { label: "", url: "" },
-      { label: "", url: "" }
+      { label: "", url: "" },
     ],
-    
+
     // Design choices
     cardType: "",
     backgroundType: "",
-    
+
     // Additional info
     description: "",
     timeline: "",
-    budget: ""
+    budget: "",
   });
 
-  const updateLink = (index: number, field: 'label' | 'url', value: string) => {
-    setFormData(prev => ({
+  const updateLink = (index: number, field: "label" | "url", value: string) => {
+    setFormData((prev) => ({
       ...prev,
-      links: prev.links.map((link, i) => 
+      links: prev.links.map((link, i) =>
         i === index ? { ...link, [field]: value } : link
-      )
+      ),
     }));
   };
 
@@ -81,7 +147,7 @@ const Form = () => {
     e.preventDefault();
     toast({
       title: "Form Submitted!",
-      description: "We'll get back to you within 24 hours with a custom quote."
+      description: "We'll get back to you within 24 hours with a custom quote.",
     });
     console.log("Form submission:", formData);
   };
@@ -112,7 +178,9 @@ const Form = () => {
                 <Input
                   id="name"
                   value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, name: e.target.value }))
+                  }
                   required
                 />
               </div>
@@ -122,7 +190,9 @@ const Form = () => {
                   id="email"
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, email: e.target.value }))
+                  }
                   required
                 />
               </div>
@@ -131,7 +201,9 @@ const Form = () => {
                 <Input
                   id="phone"
                   value={formData.phone}
-                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, phone: e.target.value }))
+                  }
                 />
               </div>
             </CardContent>
@@ -141,7 +213,9 @@ const Form = () => {
           <Card>
             <CardHeader>
               <CardTitle>Page Content</CardTitle>
-              <p className="text-sm text-gray-600">What should appear on your page?</p>
+              <p className="text-sm text-gray-600">
+                What should appear on your page?
+              </p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -150,7 +224,12 @@ const Form = () => {
                   <Input
                     id="title"
                     value={formData.title}
-                    onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        title: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., John Smith"
                     required
                   />
@@ -160,28 +239,43 @@ const Form = () => {
                   <Input
                     id="username"
                     value={formData.username}
-                    onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        username: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., @johnsmith"
                   />
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="subtitle">Subtitle/Bio</Label>
                 <Input
                   id="subtitle"
                   value={formData.subtitle}
-                  onChange={(e) => setFormData(prev => ({ ...prev, subtitle: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      subtitle: e.target.value,
+                    }))
+                  }
                   placeholder="e.g., Photographer & Content Creator"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="picture">Profile Picture URL</Label>
                 <Input
                   id="picture"
                   value={formData.picture}
-                  onChange={(e) => setFormData(prev => ({ ...prev, picture: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      picture: e.target.value,
+                    }))
+                  }
                   placeholder="https://example.com/your-photo.jpg"
                 />
                 <p className="text-xs text-gray-500">
@@ -199,13 +293,20 @@ const Form = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               {formData.links.map((link, index) => (
-                <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border rounded-lg">
+                <div
+                  key={index}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border rounded-lg"
+                >
                   <div className="space-y-2">
-                    <Label htmlFor={`link-label-${index}`}>Link {index + 1} Title</Label>
+                    <Label htmlFor={`link-label-${index}`}>
+                      Link {index + 1} Title
+                    </Label>
                     <Input
                       id={`link-label-${index}`}
                       value={link.label}
-                      onChange={(e) => updateLink(index, 'label', e.target.value)}
+                      onChange={(e) =>
+                        updateLink(index, "label", e.target.value)
+                      }
                       placeholder="e.g., My Instagram, Shop Now, Book a Call"
                     />
                   </div>
@@ -214,7 +315,7 @@ const Form = () => {
                     <Input
                       id={`link-url-${index}`}
                       value={link.url}
-                      onChange={(e) => updateLink(index, 'url', e.target.value)}
+                      onChange={(e) => updateLink(index, "url", e.target.value)}
                       placeholder="https://example.com"
                     />
                   </div>
@@ -232,7 +333,12 @@ const Form = () => {
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label>Card Style</Label>
-                <Select value={formData.cardType} onValueChange={(value) => setFormData(prev => ({ ...prev, cardType: value }))}>
+                <Select
+                  value={formData.cardType}
+                  onValueChange={(value) =>
+                    setFormData((prev) => ({ ...prev, cardType: value }))
+                  }
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Choose a card style" />
                   </SelectTrigger>
@@ -241,17 +347,24 @@ const Form = () => {
                       <SelectItem key={type.id} value={type.id}>
                         <div>
                           <div className="font-medium">{type.label}</div>
-                          <div className="text-xs text-gray-500">{type.description}</div>
+                          <div className="text-xs text-gray-500">
+                            {type.description}
+                          </div>
                         </div>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div className="space-y-2">
                 <Label>Background Style</Label>
-                <Select value={formData.backgroundType} onValueChange={(value) => setFormData(prev => ({ ...prev, backgroundType: value }))}>
+                <Select
+                  value={formData.backgroundType}
+                  onValueChange={(value) =>
+                    setFormData((prev) => ({ ...prev, backgroundType: value }))
+                  }
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Choose a background" />
                   </SelectTrigger>
@@ -260,7 +373,9 @@ const Form = () => {
                       <SelectItem key={type.id} value={type.id}>
                         <div>
                           <div className="font-medium">{type.label}</div>
-                          <div className="text-xs text-gray-500">{type.description}</div>
+                          <div className="text-xs text-gray-500">
+                            {type.description}
+                          </div>
                         </div>
                       </SelectItem>
                     ))}
@@ -281,7 +396,12 @@ const Form = () => {
                 <Textarea
                   id="description"
                   value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
                   rows={4}
                   placeholder="Any specific colors, fonts, animations, or special features you want?"
                 />
@@ -292,7 +412,12 @@ const Form = () => {
                   <Input
                     id="timeline"
                     value={formData.timeline}
-                    onChange={(e) => setFormData(prev => ({ ...prev, timeline: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        timeline: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., ASAP, 1 week, flexible"
                   />
                 </div>
@@ -301,7 +426,12 @@ const Form = () => {
                   <Input
                     id="budget"
                     value={formData.budget}
-                    onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        budget: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., $100-300, let me know"
                   />
                 </div>
@@ -316,7 +446,8 @@ const Form = () => {
                 Submit Request
               </Button>
               <p className="text-sm text-gray-500 mt-2">
-                We'll get back to you within 24 hours with a custom quote and preview!
+                We'll get back to you within 24 hours with a custom quote and
+                preview!
               </p>
             </CardContent>
           </Card>

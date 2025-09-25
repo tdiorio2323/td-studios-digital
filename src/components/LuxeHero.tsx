@@ -1,4 +1,4 @@
-import { PremiumButton } from '@/components/PremiumButton';
+import { PremiumButton } from "@/components/PremiumButton";
 
 interface LuxeHeroProps {
   title: string;
@@ -9,14 +9,21 @@ interface LuxeHeroProps {
   imageAlt?: string;
 }
 
-export function LuxeHero({ title, subtitle, tag, cta, imageSrc, imageAlt }: LuxeHeroProps) {
+export function LuxeHero({
+  title,
+  subtitle,
+  tag,
+  cta,
+  imageSrc,
+  imageAlt,
+}: LuxeHeroProps) {
   return (
     <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-surface/80 shadow-card">
       <div className="relative h-[360px] w-full md:h-[460px]">
         {imageSrc ? (
           <img
             src={imageSrc}
-            alt={imageAlt ?? ''}
+            alt={imageAlt ?? ""}
             className="absolute inset-0 h-full w-full object-cover object-center"
             loading="eager"
           />

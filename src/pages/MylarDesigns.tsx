@@ -1,15 +1,15 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 const MylarDesigns: React.FC = () => {
   // Placeholder designs - would be replaced with real data
   const designs = Array.from({ length: 12 }, (_, i) => ({
     id: i + 1,
     title: `Premium Design ${i + 1}`,
-    category: ['Indica', 'Sativa', 'Hybrid', 'Edibles'][i % 4],
-    price: '$299',
-    image: '/placeholder-mylar.jpg',
-    description: 'Premium mylar bag design with luxury finishing.',
+    category: ["Indica", "Sativa", "Hybrid", "Edibles"][i % 4],
+    price: "$299",
+    image: "/placeholder-mylar.jpg",
+    description: "Premium mylar bag design with luxury finishing.",
   }));
 
   return (
@@ -21,23 +21,36 @@ const MylarDesigns: React.FC = () => {
             Mylar Designs
           </h1>
           <p className="text-xl text-white/70 max-w-3xl mx-auto mb-8">
-            Premium mylar bag designs that elevate your cannabis products to luxury status.
-            Each design is crafted with meticulous attention to detail and brand sophistication.
+            Premium mylar bag designs that elevate your cannabis products to
+            luxury status. Each design is crafted with meticulous attention to
+            detail and brand sophistication.
           </p>
           <NavLink
             to="/custom-mylar-form"
             className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
           >
-            <span className="text-lg font-semibold text-white mr-2">Custom Mylar Design</span>
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <span className="text-lg font-semibold text-white mr-2">
+              Custom Mylar Design
+            </span>
+            <svg
+              className="w-5 h-5 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </NavLink>
         </div>
 
         {/* Filter Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {['All', 'Indica', 'Sativa', 'Hybrid', 'Edibles'].map((filter) => (
+          {["All", "Indica", "Sativa", "Hybrid", "Edibles"].map((filter) => (
             <button
               key={filter}
               className="px-6 py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 text-white/70 hover:text-white"
@@ -59,10 +72,22 @@ const MylarDesigns: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 opacity-50" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-white/40">
-                    <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    <svg
+                      className="w-16 h-16 mx-auto mb-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                      />
                     </svg>
-                    <p className="text-sm font-medium">Mylar Design {design.id}</p>
+                    <p className="text-sm font-medium">
+                      Mylar Design {design.id}
+                    </p>
                   </div>
                 </div>
 
@@ -84,8 +109,12 @@ const MylarDesigns: React.FC = () => {
               {/* Content */}
               <div className="p-6 space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-white">{design.title}</h3>
-                  <span className="text-xl font-bold text-white">{design.price}</span>
+                  <h3 className="text-lg font-bold text-white">
+                    {design.title}
+                  </h3>
+                  <span className="text-xl font-bold text-white">
+                    {design.price}
+                  </span>
                 </div>
 
                 <p className="text-white/60 text-sm">{design.description}</p>
@@ -118,7 +147,8 @@ const MylarDesigns: React.FC = () => {
                 Need Something Custom?
               </h2>
               <p className="text-lg text-white/70 mb-8">
-                Our design team can create bespoke mylar packaging tailored specifically to your brand.
+                Our design team can create bespoke mylar packaging tailored
+                specifically to your brand.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NavLink

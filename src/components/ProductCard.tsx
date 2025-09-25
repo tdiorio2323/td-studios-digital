@@ -10,7 +10,12 @@ type Props = {
   description?: string;
 };
 
-export const ProductCard: React.FC<Props> = ({ name, image1, image2, description }) => {
+export const ProductCard: React.FC<Props> = ({
+  name,
+  image1,
+  image2,
+  description,
+}) => {
   const [hovered, setHovered] = useState(false);
   const activeImage = hovered && image2 ? image2 : image1;
   const { addItem } = useCart();
@@ -29,18 +34,26 @@ export const ProductCard: React.FC<Props> = ({ name, image1, image2, description
           draggable={false}
           onContextMenu={(e) => e.preventDefault()}
           style={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            cursor: 'default'
+            maxWidth: "100%",
+            maxHeight: "100%",
+            cursor: "default",
           }}
         />
       </div>
       <div className="p-4 flex flex-col gap-2">
-        <h3 className="text-lg font-semibold text-white leading-tight line-clamp-2">{name}</h3>
-        {description && <p className="text-white/60 text-sm mt-1 mb-3 leading-normal line-clamp-1">{description}</p>}
+        <h3 className="text-lg font-semibold text-white leading-tight line-clamp-2">
+          {name}
+        </h3>
+        {description && (
+          <p className="text-white/60 text-sm mt-1 mb-3 leading-normal line-clamp-1">
+            {description}
+          </p>
+        )}
         <div className="mt-auto">
           <button
-            onClick={() => addItem({ name, image: image1, subtitle: description })}
+            onClick={() =>
+              addItem({ name, image: image1, subtitle: description })
+            }
             className="w-full px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg text-white font-semibold hover:bg-white/30 transition-all duration-300"
           >
             Add to Cart

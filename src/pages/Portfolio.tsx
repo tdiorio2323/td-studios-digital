@@ -1,5 +1,5 @@
-import React from 'react';
-import { LiquidGlassCard } from '@/components/LiquidGlass';
+import React from "react";
+import { LiquidGlassCard } from "@/components/LiquidGlass";
 
 const Portfolio: React.FC = () => {
   const placeholders = Array.from({ length: 16 }, (_, index) => index + 1);
@@ -22,7 +22,8 @@ const Portfolio: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold">Selected Work</h2>
             <p className="mt-4 text-lg text-white/60 max-w-3xl mx-auto">
-              A curated snapshot of brand, product, and campaign executions crafted for clients worldwide.
+              A curated snapshot of brand, product, and campaign executions
+              crafted for clients worldwide.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4 text-sm uppercase tracking-[0.35em] text-white/50">
               <span>BRAND SYSTEMS</span>

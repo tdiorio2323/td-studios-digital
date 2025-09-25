@@ -46,12 +46,14 @@ node scripts/watchScreenshots.js
 ## 📁 System Architecture
 
 ### Data-Driven Approach
+
 - **Single Component**: `AuthCard.tsx` renders all cards
 - **JSON Data**: `src/data/authCards.json` stores all card configurations
 - **Dynamic Routes**: `/:slug` automatically loads the right card
 - **No Code Duplication**: Add hundreds of cards without creating new files
 
 ### Files Structure
+
 ```
 src/
   components/
@@ -73,13 +75,16 @@ logs/
 ## 🔧 Manual Tools
 
 ### LinktreeBuilder
+
 Visit `http://localhost:3000/__auth-builder` to manually create cards with:
+
 - Live preview
 - Drag & drop interface
 - Bulk button management
 - Code generation
 
 ### Direct JSON Editing
+
 Edit `src/data/authCards.json` directly for batch operations:
 
 ```json
@@ -101,18 +106,21 @@ Edit `src/data/authCards.json` directly for batch operations:
 ## 🤖 OCR Features
 
 ### Smart Detection
+
 - **Usernames**: Finds `@username` patterns
 - **Social Links**: Auto-labels Instagram, Twitter, TikTok, etc.
 - **Domain Parsing**: Converts URLs to clean button labels
 - **Duplicate Prevention**: Warns before overwriting existing cards
 
 ### Interactive Prompts
+
 - Review detected data before saving
 - Edit labels and URLs
 - Add manual links if none detected
 - Fallback for poor OCR quality
 
 ### Image Optimization
+
 - Auto-resizes to 512×512 max
 - Preserves aspect ratio
 - Optimizes file size
@@ -121,6 +129,7 @@ Edit `src/data/authCards.json` directly for batch operations:
 ## 📊 Logging & History
 
 Every OCR run logs to `logs/ocr_runs.log`:
+
 ```
 2025-09-10T04:55:23.456 | screenshot.png | slug=punkiez | username=@punkiez | links=['https://instagram.com/punkiez']
 ```
@@ -130,6 +139,7 @@ Track your mass production progress and debug issues.
 ## 🎯 Competing with Linktree
 
 This system lets you:
+
 - **Mass produce** hundreds of Link-in-Bio pages from screenshots
 - **Customize** each card's branding and styling
 - **Self-host** without platform fees or restrictions
@@ -137,6 +147,7 @@ This system lets you:
 - **Scale rapidly** with automation
 
 ### Workflow for Taking Over Linktree
+
 1. Screenshot competitor profiles (Linktree, Beacon, etc.)
 2. Drop screenshots into `/screenshots`
 3. OCR extracts their links automatically
@@ -147,6 +158,7 @@ This system lets you:
 ## 🔄 Batch Operations
 
 ### Processing Multiple Screenshots
+
 ```bash
 # Process all images in screenshots/ folder at once
 python3 scripts/ocr_to_json.py
@@ -156,13 +168,15 @@ python3 scripts/ocr_to_json.py path/to/image.png
 ```
 
 ### CSV Import (Coming Soon)
+
 For even faster batch processing from spreadsheets.
 
 ## 🎨 Styling & Customization
 
 Cards use glassmorphism design with:
+
 - Backdrop blur effects
-- Semi-transparent backgrounds  
+- Semi-transparent backgrounds
 - White shadow glows
 - Bebas Neue font for buttons
 - Chrome button variant
@@ -173,6 +187,7 @@ Customize in `AuthCard.tsx` or create themed variants.
 ## 🚀 Production Deployment
 
 1. Build static assets:
+
    ```bash
    npm run build
    ```
@@ -186,16 +201,19 @@ Customize in `AuthCard.tsx` or create themed variants.
 ## 🔧 Troubleshooting
 
 ### OCR Not Working?
+
 - Ensure Tesseract is installed: `tesseract --version`
 - Check image quality (avoid blurry screenshots)
 - Verify Python path: `python3 --version`
 
 ### Watcher Not Starting?
+
 - Install chokidar: `npm install chokidar --save-dev`
 - Check Node.js permissions for file watching
 - Ensure screenshots folder exists
 
 ### Images Not Showing?
+
 - Verify public/images folder has write permissions
 - Check image paths in authCards.json
 - Ensure Next.js is serving static files correctly

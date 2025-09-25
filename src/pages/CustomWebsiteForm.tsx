@@ -1,165 +1,175 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const CustomWebsiteForm: React.FC = () => {
   const [formData, setFormData] = useState({
     // Basic Information
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
 
     // Project Type
-    websiteType: '',
+    websiteType: "",
 
     // Basic Website Fields
-    pages: '',
+    pages: "",
     features: [] as string[],
 
     // E-commerce Fields
-    productCount: '',
+    productCount: "",
     paymentMethods: [] as string[],
     shippingOptions: [],
 
     // Portfolio Fields
-    portfolioItems: '',
-    galleries: '',
+    portfolioItems: "",
+    galleries: "",
 
     // Blog/Content Fields
-    contentManagement: '',
+    contentManagement: "",
     blogFeatures: [] as string[],
 
     // Business Fields
-    businessType: '',
-    servicePages: '',
+    businessType: "",
+    servicePages: "",
 
     // Common Fields
-    designStyle: '',
-    colorPreferences: '',
-    timeline: '',
-    budget: '',
-    existingWebsite: '',
-    inspiration: '',
-    additionalRequests: '',
+    designStyle: "",
+    colorPreferences: "",
+    timeline: "",
+    budget: "",
+    existingWebsite: "",
+    inspiration: "",
+    additionalRequests: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCheckboxChange = (name: string, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: prev[name as keyof typeof prev].includes(value)
-        ? (prev[name as keyof typeof prev] as string[]).filter(item => item !== value)
-        : [...(prev[name as keyof typeof prev] as string[]), value]
+        ? (prev[name as keyof typeof prev] as string[]).filter(
+            (item) => item !== value
+          )
+        : [...(prev[name as keyof typeof prev] as string[]), value],
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Custom Website Form submitted:', formData);
-    alert('Thank you for your website request! We\'ll review your requirements and provide a detailed proposal within 48 hours.');
+    console.log("Custom Website Form submitted:", formData);
+    alert(
+      "Thank you for your website request! We'll review your requirements and provide a detailed proposal within 48 hours."
+    );
   };
 
   const websiteTypes = [
-    'Business/Corporate',
-    'E-commerce Store',
-    'Portfolio/Gallery',
-    'Blog/Magazine',
-    'Landing Page',
-    'Cannabis Dispensary',
-    'Restaurant/Food',
-    'Personal Brand',
-    'Non-Profit',
-    'Other',
+    "Business/Corporate",
+    "E-commerce Store",
+    "Portfolio/Gallery",
+    "Blog/Magazine",
+    "Landing Page",
+    "Cannabis Dispensary",
+    "Restaurant/Food",
+    "Personal Brand",
+    "Non-Profit",
+    "Other",
   ];
 
   const commonFeatures = [
-    'Contact Forms',
-    'Google Maps Integration',
-    'Social Media Integration',
-    'Newsletter Signup',
-    'Live Chat',
-    'Analytics Setup',
-    'SEO Optimization',
-    'Mobile Responsive',
-    'SSL Certificate',
-    'Speed Optimization',
+    "Contact Forms",
+    "Google Maps Integration",
+    "Social Media Integration",
+    "Newsletter Signup",
+    "Live Chat",
+    "Analytics Setup",
+    "SEO Optimization",
+    "Mobile Responsive",
+    "SSL Certificate",
+    "Speed Optimization",
   ];
 
   const ecommerceFeatures = [
-    'Product Catalog',
-    'Shopping Cart',
-    'User Accounts',
-    'Order Management',
-    'Inventory Tracking',
-    'Wishlist',
-    'Product Reviews',
-    'Discount Codes',
-    'Multi-currency',
-    'Tax Calculation',
+    "Product Catalog",
+    "Shopping Cart",
+    "User Accounts",
+    "Order Management",
+    "Inventory Tracking",
+    "Wishlist",
+    "Product Reviews",
+    "Discount Codes",
+    "Multi-currency",
+    "Tax Calculation",
   ];
 
   const paymentOptions = [
-    'Stripe',
-    'PayPal',
-    'Square',
-    'Apple Pay',
-    'Google Pay',
-    'Bank Transfer',
-    'Cryptocurrency',
-    'Other',
+    "Stripe",
+    "PayPal",
+    "Square",
+    "Apple Pay",
+    "Google Pay",
+    "Bank Transfer",
+    "Cryptocurrency",
+    "Other",
   ];
 
   const blogFeatures = [
-    'Article Management',
-    'Categories & Tags',
-    'Author Profiles',
-    'Comment System',
-    'Search Functionality',
-    'Related Posts',
-    'Social Sharing',
-    'Email Subscriptions',
-    'Content Scheduling',
-    'Archive Pages',
+    "Article Management",
+    "Categories & Tags",
+    "Author Profiles",
+    "Comment System",
+    "Search Functionality",
+    "Related Posts",
+    "Social Sharing",
+    "Email Subscriptions",
+    "Content Scheduling",
+    "Archive Pages",
   ];
 
   const designStyles = [
-    'Modern/Minimalist',
-    'Bold & Vibrant',
-    'Elegant/Luxury',
-    'Playful/Creative',
-    'Professional/Corporate',
-    'Dark/Edgy',
-    'Organic/Natural',
-    'Retro/Vintage',
+    "Modern/Minimalist",
+    "Bold & Vibrant",
+    "Elegant/Luxury",
+    "Playful/Creative",
+    "Professional/Corporate",
+    "Dark/Edgy",
+    "Organic/Natural",
+    "Retro/Vintage",
   ];
 
   const timelines = [
-    '2-3 weeks',
-    '1 month',
-    '2 months',
-    '3 months',
-    '4+ months',
-    'Flexible',
+    "2-3 weeks",
+    "1 month",
+    "2 months",
+    "3 months",
+    "4+ months",
+    "Flexible",
   ];
 
   const budgets = [
-    'Under $2,500',
-    '$2,500 - $5,000',
-    '$5,000 - $10,000',
-    '$10,000 - $20,000',
-    '$20,000 - $50,000',
-    '$50,000+',
+    "Under $2,500",
+    "$2,500 - $5,000",
+    "$5,000 - $10,000",
+    "$10,000 - $20,000",
+    "$20,000 - $50,000",
+    "$50,000+",
   ];
 
   const renderWebsiteTypeFields = () => {
     switch (formData.websiteType) {
-      case 'E-commerce Store':
+      case "E-commerce Store":
         return (
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-white">E-commerce Details</h3>
+            <h3 className="text-xl font-semibold text-white">
+              E-commerce Details
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-white/80 mb-2">
@@ -172,10 +182,18 @@ const CustomWebsiteForm: React.FC = () => {
                   className="w-full px-4 py-3 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
                 >
                   <option value="">Select range</option>
-                  <option value="1-25" className="bg-black text-white">1-25 products</option>
-                  <option value="26-100" className="bg-black text-white">26-100 products</option>
-                  <option value="101-500" className="bg-black text-white">101-500 products</option>
-                  <option value="500+" className="bg-black text-white">500+ products</option>
+                  <option value="1-25" className="bg-black text-white">
+                    1-25 products
+                  </option>
+                  <option value="26-100" className="bg-black text-white">
+                    26-100 products
+                  </option>
+                  <option value="101-500" className="bg-black text-white">
+                    101-500 products
+                  </option>
+                  <option value="500+" className="bg-black text-white">
+                    500+ products
+                  </option>
                 </select>
               </div>
             </div>
@@ -190,7 +208,7 @@ const CustomWebsiteForm: React.FC = () => {
                     <input
                       type="checkbox"
                       checked={formData.features.includes(feature)}
-                      onChange={() => handleCheckboxChange('features', feature)}
+                      onChange={() => handleCheckboxChange("features", feature)}
                       className="rounded border-white/20 bg-black/30 text-white focus:ring-white/50"
                     />
                     <span className="text-white/80 text-sm">{feature}</span>
@@ -209,7 +227,9 @@ const CustomWebsiteForm: React.FC = () => {
                     <input
                       type="checkbox"
                       checked={formData.paymentMethods.includes(payment)}
-                      onChange={() => handleCheckboxChange('paymentMethods', payment)}
+                      onChange={() =>
+                        handleCheckboxChange("paymentMethods", payment)
+                      }
                       className="rounded border-white/20 bg-black/30 text-white focus:ring-white/50"
                     />
                     <span className="text-white/80 text-sm">{payment}</span>
@@ -220,10 +240,12 @@ const CustomWebsiteForm: React.FC = () => {
           </div>
         );
 
-      case 'Portfolio/Gallery':
+      case "Portfolio/Gallery":
         return (
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-white">Portfolio Details</h3>
+            <h3 className="text-xl font-semibold text-white">
+              Portfolio Details
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-white/80 mb-2">
@@ -255,10 +277,12 @@ const CustomWebsiteForm: React.FC = () => {
           </div>
         );
 
-      case 'Blog/Magazine':
+      case "Blog/Magazine":
         return (
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-white">Blog/Content Details</h3>
+            <h3 className="text-xl font-semibold text-white">
+              Blog/Content Details
+            </h3>
             <div>
               <label className="block text-sm font-medium text-white/80 mb-2">
                 Content Management Preference
@@ -270,10 +294,18 @@ const CustomWebsiteForm: React.FC = () => {
                 className="w-full px-4 py-3 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300"
               >
                 <option value="">Select CMS</option>
-                <option value="WordPress" className="bg-black text-white">WordPress</option>
-                <option value="Custom CMS" className="bg-black text-white">Custom CMS</option>
-                <option value="Headless CMS" className="bg-black text-white">Headless CMS</option>
-                <option value="Static Site" className="bg-black text-white">Static Site</option>
+                <option value="WordPress" className="bg-black text-white">
+                  WordPress
+                </option>
+                <option value="Custom CMS" className="bg-black text-white">
+                  Custom CMS
+                </option>
+                <option value="Headless CMS" className="bg-black text-white">
+                  Headless CMS
+                </option>
+                <option value="Static Site" className="bg-black text-white">
+                  Static Site
+                </option>
               </select>
             </div>
 
@@ -287,7 +319,9 @@ const CustomWebsiteForm: React.FC = () => {
                     <input
                       type="checkbox"
                       checked={formData.blogFeatures.includes(feature)}
-                      onChange={() => handleCheckboxChange('blogFeatures', feature)}
+                      onChange={() =>
+                        handleCheckboxChange("blogFeatures", feature)
+                      }
                       className="rounded border-white/20 bg-black/30 text-white focus:ring-white/50"
                     />
                     <span className="text-white/80 text-sm">{feature}</span>
@@ -298,10 +332,12 @@ const CustomWebsiteForm: React.FC = () => {
           </div>
         );
 
-      case 'Business/Corporate':
+      case "Business/Corporate":
         return (
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-white">Business Details</h3>
+            <h3 className="text-xl font-semibold text-white">
+              Business Details
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-white/80 mb-2">
@@ -347,14 +383,14 @@ const CustomWebsiteForm: React.FC = () => {
             Custom Website Request
           </h1>
           <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            Let's create a stunning website that perfectly represents your brand.
-            Our form adapts to your specific website type for a tailored experience.
+            Let's create a stunning website that perfectly represents your
+            brand. Our form adapts to your specific website type for a tailored
+            experience.
           </p>
         </div>
 
         <div className="p-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl">
           <form onSubmit={handleSubmit} className="space-y-8">
-
             {/* Contact Information */}
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-white border-b border-white/20 pb-4">
@@ -436,7 +472,13 @@ const CustomWebsiteForm: React.FC = () => {
                 >
                   <option value="">Select website type</option>
                   {websiteTypes.map((type, index) => (
-                    <option key={index} value={type} className="bg-black text-white">{type}</option>
+                    <option
+                      key={index}
+                      value={type}
+                      className="bg-black text-white"
+                    >
+                      {type}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -470,11 +512,16 @@ const CustomWebsiteForm: React.FC = () => {
                 </label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {commonFeatures.map((feature) => (
-                    <label key={feature} className="flex items-center space-x-2">
+                    <label
+                      key={feature}
+                      className="flex items-center space-x-2"
+                    >
                       <input
                         type="checkbox"
                         checked={formData.features.includes(feature)}
-                        onChange={() => handleCheckboxChange('features', feature)}
+                        onChange={() =>
+                          handleCheckboxChange("features", feature)
+                        }
                         className="rounded border-white/20 bg-black/30 text-white focus:ring-white/50"
                       />
                       <span className="text-white/80 text-sm">{feature}</span>
@@ -502,7 +549,13 @@ const CustomWebsiteForm: React.FC = () => {
                   >
                     <option value="">Select design style</option>
                     {designStyles.map((style, index) => (
-                      <option key={index} value={style} className="bg-black text-white">{style}</option>
+                      <option
+                        key={index}
+                        value={style}
+                        className="bg-black text-white"
+                      >
+                        {style}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -568,7 +621,13 @@ const CustomWebsiteForm: React.FC = () => {
                   >
                     <option value="">Select timeline</option>
                     {timelines.map((time, index) => (
-                      <option key={index} value={time} className="bg-black text-white">{time}</option>
+                      <option
+                        key={index}
+                        value={time}
+                        className="bg-black text-white"
+                      >
+                        {time}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -584,7 +643,13 @@ const CustomWebsiteForm: React.FC = () => {
                   >
                     <option value="">Select budget</option>
                     {budgets.map((budget, index) => (
-                      <option key={index} value={budget} className="bg-black text-white">{budget}</option>
+                      <option
+                        key={index}
+                        value={budget}
+                        className="bg-black text-white"
+                      >
+                        {budget}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -614,7 +679,8 @@ const CustomWebsiteForm: React.FC = () => {
                 Submit Website Request
               </button>
               <p className="text-center text-white/60 text-sm mt-4">
-                We'll review your requirements and provide a detailed proposal within 48 hours
+                We'll review your requirements and provide a detailed proposal
+                within 48 hours
               </p>
             </div>
           </form>

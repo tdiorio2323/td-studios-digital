@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function Katya() {
   const [currentImage, setCurrentImage] = useState(0);
-  
+
   const velAuraImages = [
-    '/images/katya2.jpg',
-    '/images/katyavelaura1.jpg',
-    '/images/VelAura_Main_3_9aac14ea-ee8d-4792-8596-df036ccca732.jpg',
-    '/images/VelAura_Main_4.jpg',
-    '/images/VELAURA_FILE-removebg-preview.png',
-    '/images/Your_paragraph_text_1.png'
+    "/images/katya2.jpg",
+    "/images/katyavelaura1.jpg",
+    "/images/VelAura_Main_3_9aac14ea-ee8d-4792-8596-df036ccca732.jpg",
+    "/images/VelAura_Main_4.jpg",
+    "/images/VELAURA_FILE-removebg-preview.png",
+    "/images/Your_paragraph_text_1.png",
   ];
 
   useEffect(() => {
@@ -22,9 +22,9 @@ export default function Katya() {
   return (
     <div
       className="min-h-dvh w-full bg-cover bg-center bg-no-repeat relative"
-      style={{ 
+      style={{
         backgroundImage: "url('/images/para.webp')",
-        backgroundPosition: "center top"
+        backgroundPosition: "center top",
       }}
     >
       {/* Subtle overlay for better text readability */}
@@ -32,13 +32,12 @@ export default function Katya() {
 
       <main className="relative z-10 mx-auto flex min-h-screen max-w-sm items-start justify-center pt-4 pb-4 px-4">
         <div className="w-full rounded-3xl bg-black/80 shadow-[0_0_80px_rgba(255,255,255,0.3)] ring-1 ring-white/10 p-4 relative overflow-hidden drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
-          
           {/* VelAura Image Slideshow above buttons */}
           <div className="mb-4 overflow-hidden rounded-2xl border-2 border-white/20 shadow-lg h-64">
-            <img 
-              src={velAuraImages[currentImage]} 
-              alt="VelAura Collection" 
-              className="w-full h-full object-cover transition-opacity duration-500" 
+            <img
+              src={velAuraImages[currentImage]}
+              alt="VelAura Collection"
+              className="w-full h-full object-cover transition-opacity duration-500"
             />
           </div>
 
@@ -143,10 +142,14 @@ export default function Katya() {
 
           {/* Verification Badge (similar to LinkGenie) */}
           <div className="flex justify-center mt-6">
-            <div className="flex items-center space-x-2 bg-[#1da1f2]/90 backdrop-blur-sm 
-                          rounded-full px-4 py-2 border border-white/20">
+            <div
+              className="flex items-center space-x-2 bg-[#1da1f2]/90 backdrop-blur-sm 
+                          rounded-full px-4 py-2 border border-white/20"
+            >
               <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-white text-xs font-medium">Verified Profile</span>
+              <span className="text-white text-xs font-medium">
+                Verified Profile
+              </span>
             </div>
           </div>
         </div>

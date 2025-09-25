@@ -11,30 +11,32 @@ const Show = () => {
 
   useEffect(() => {
     const ogTitleMeta = document.querySelector('meta[property="og:title"]');
-    let originalOgTitle = '';
+    let originalOgTitle = "";
     if (ogTitleMeta) {
-      originalOgTitle = ogTitleMeta.getAttribute('content') || '';
-      ogTitleMeta.setAttribute('content', 'BAGMAN');
+      originalOgTitle = ogTitleMeta.getAttribute("content") || "";
+      ogTitleMeta.setAttribute("content", "BAGMAN");
     }
 
     return () => {
       if (ogTitleMeta) {
-        ogTitleMeta.setAttribute('content', originalOgTitle);
+        ogTitleMeta.setAttribute("content", originalOgTitle);
       }
     };
   }, []);
 
-  const recentImages = [ // Add recentImages array
-    '/images/bagman_ny_slideshow/Generated Image September 06, 2025 - 8_31PM (1).jpeg',
-    '/images/bagman_ny_slideshow/HNRU1785.PNG',
-    '/images/bagman_ny_slideshow/IMG_4648.JPG',
-    '/images/bagman_ny_slideshow/BAGMAN Floating Mockup.png',
-    '/images/bagman_ny_slideshow/BAGMAN GATE.png',
-    '/images/bagman_ny_slideshow/bagman book.jpg',
-    '/images/bagman_ny_slideshow/BAGMAN.png'
+  const recentImages = [
+    // Add recentImages array
+    "/images/bagman_ny_slideshow/Generated Image September 06, 2025 - 8_31PM (1).jpeg",
+    "/images/bagman_ny_slideshow/HNRU1785.PNG",
+    "/images/bagman_ny_slideshow/IMG_4648.JPG",
+    "/images/bagman_ny_slideshow/BAGMAN Floating Mockup.png",
+    "/images/bagman_ny_slideshow/BAGMAN GATE.png",
+    "/images/bagman_ny_slideshow/bagman book.jpg",
+    "/images/bagman_ny_slideshow/BAGMAN.png",
   ];
 
-  useEffect(() => { // Add useEffect for slideshow
+  useEffect(() => {
+    // Add useEffect for slideshow
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % recentImages.length);
     }, 10000); // 10 seconds
@@ -47,14 +49,18 @@ const Show = () => {
       <div
         className="w-full max-w-md mx-auto rounded-3xl bg-black/90 shadow-[0_0_60px_rgba(255,255,255,0.6)] ring-1 ring-white/20 p-4 sm:p-6 relative overflow-hidden drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] flex flex-col"
         style={{
-          height: 'calc(100dvh - 1rem)',
-          maxHeight: '800px',
-          minHeight: '600px'
+          height: "calc(100dvh - 1rem)",
+          maxHeight: "800px",
+          minHeight: "600px",
         }}
       >
         {/* CABANA Logo */}
         <div className="flex justify-center mb-4 sm:mb-6 relative z-10 flex-shrink-0">
-          <img src={LOGO_URL} alt="CABANA" className="h-24 sm:h-32 md:h-36 w-auto" />
+          <img
+            src={LOGO_URL}
+            alt="CABANA"
+            className="h-24 sm:h-32 md:h-36 w-auto"
+          />
         </div>
 
         {/* Slideshow of recent images */}

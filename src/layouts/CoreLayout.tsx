@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react';
-import { useCart } from '@/hooks/useCart';
-import { CartPreview } from '@/components/CartPreview';
-import Footer from '@/components/layout/Footer';
-import ShimmerText from '@/components/ShimmerText';
+import React, { useEffect, useState } from "react";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/hooks/useCart";
+import { CartPreview } from "@/components/CartPreview";
+import Footer from "@/components/layout/Footer";
+import ShimmerText from "@/components/ShimmerText";
 
 interface CoreLayoutProps {
   children?: React.ReactNode;
@@ -17,23 +17,23 @@ function useBodyScrollLock(locked: boolean) {
     const body = document.body;
     const scrollY = window.scrollY;
     if (locked) {
-      html.style.overflow = 'hidden';
-      body.style.position = 'fixed';
+      html.style.overflow = "hidden";
+      body.style.position = "fixed";
       body.style.top = `-${scrollY}px`;
-      body.style.width = '100%';
+      body.style.width = "100%";
     } else {
-      const top = parseInt(body.style.top || '0', 10) || 0;
-      html.style.overflow = '';
-      body.style.position = '';
-      body.style.top = '';
-      body.style.width = '';
+      const top = parseInt(body.style.top || "0", 10) || 0;
+      html.style.overflow = "";
+      body.style.position = "";
+      body.style.top = "";
+      body.style.width = "";
       if (top) window.scrollTo(0, -top);
     }
     return () => {
-      html.style.overflow = '';
-      body.style.position = '';
-      body.style.top = '';
-      body.style.width = '';
+      html.style.overflow = "";
+      body.style.position = "";
+      body.style.top = "";
+      body.style.width = "";
     };
   }, [locked]);
 }
@@ -49,19 +49,23 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
   useBodyScrollLock(isMobileMenuOpen);
 
   // close mobile on route change
-  useEffect(() => { setIsMobileMenuOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navigationLinks = [
-    { to: '/', label: 'HOME' },
-    { to: '/web', label: 'WEB' },
-    { to: '/dev', label: 'DEV' },
-    { to: '/social', label: 'SOCIAL' },
-    { to: '/portfolio', label: 'PORTFOLIO' },
-    { to: '/contact', label: 'CONTACT' },
+    { to: "/", label: "HOME" },
+    { to: "/web", label: "WEB" },
+    { to: "/dev", label: "DEV" },
+    { to: "/social", label: "SOCIAL" },
+    { to: "/portfolio", label: "PORTFOLIO" },
+    { to: "/contact", label: "CONTACT" },
   ];
 
-  const cartEnabledPaths = ['/shop', '/checkout'];
-  const showCartButton = cartEnabledPaths.some((path) => location.pathname.startsWith(path));
+  const cartEnabledPaths = ["/shop", "/checkout"];
+  const showCartButton = cartEnabledPaths.some((path) =>
+    location.pathname.startsWith(path)
+  );
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-white">
@@ -76,7 +80,9 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
                 to="/"
                 onClick={(e) => {
                   // force client-side nav and stop any parent handlers
-                  e.preventDefault(); e.stopPropagation(); navigate('/');
+                  e.preventDefault();
+                  e.stopPropagation();
+                  navigate("/");
                 }}
                 className="group inline-flex cursor-pointer"
                 aria-label="Go to home"
@@ -96,7 +102,10 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
                     key={to}
                     to={to}
                     className={({ isActive }) =>
-                      `text-sm font-medium tracking-tight transition-all duration-150 ease-out rounded-full px-3 py-1 ${isActive ? 'bg-white/10 text-white' : 'text-neutral-300 hover:text-white hover:bg-white/5'
+                      `text-sm font-medium tracking-tight transition-all duration-150 ease-out rounded-full px-3 py-1 ${
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-neutral-300 hover:text-white hover:bg-white/5"
                       }`
                     }
                   >
@@ -119,7 +128,6 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
                     )}
                   </button>
                 )}
-
               </nav>
             </div>
           </div>
@@ -129,7 +137,11 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
             {/* Mobile Logo */}
             <NavLink
               to="/"
-              onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate('/'); }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                navigate("/");
+              }}
               className="group inline-flex cursor-pointer"
               aria-label="Go to home"
             >
@@ -141,14 +153,27 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(v => !v)}
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
               className="p-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={
+                    isMobileMenuOpen
+                      ? "M6 18L18 6M6 6l12 12"
+                      : "M4 6h16M4 12h16M4 18h16"
+                  }
+                />
               </svg>
             </button>
           </div>
@@ -161,9 +186,7 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
                 className="lg:hidden fixed inset-0 bg-black/50 z-[90]"
                 onClick={() => setIsMobileMenuOpen(false)}
               />
-              <nav
-                className="lg:hidden absolute left-0 right-0 top-full z-[95] bg-black/95 backdrop-blur-md border-t border-white/10"
-              >
+              <nav className="lg:hidden absolute left-0 right-0 top-full z-[95] bg-black/95 backdrop-blur-md border-t border-white/10">
                 <div className="space-y-2 p-4">
                   {navigationLinks.map(({ to, label }) => (
                     <NavLink
@@ -171,7 +194,10 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
                       to={to}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={({ isActive }) =>
-                        `block rounded-full px-3 py-2 text-sm font-medium transition-colors ${isActive ? 'bg-white/10 text-white' : 'text-neutral-300 hover:text-white hover:bg-white/5'
+                        `block rounded-full px-3 py-2 text-sm font-medium transition-colors ${
+                          isActive
+                            ? "bg-white/10 text-white"
+                            : "text-neutral-300 hover:text-white hover:bg-white/5"
                         }`
                       }
                       role="menuitem"
@@ -184,11 +210,14 @@ const CoreLayout: React.FC<CoreLayoutProps> = ({ children }) => {
                   {showCartButton && (
                     <div className="pt-2">
                       <button
-                        onClick={() => { setIsCartOpen(true); setIsMobileMenuOpen(false); }}
+                        onClick={() => {
+                          setIsCartOpen(true);
+                          setIsMobileMenuOpen(false);
+                        }}
                         className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white"
                       >
                         <ShoppingCart className="w-4 h-4" />
-                        Cart{totalCount ? ` (${totalCount})` : ''}
+                        Cart{totalCount ? ` (${totalCount})` : ""}
                       </button>
                     </div>
                   )}

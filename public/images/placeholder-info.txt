@@ -1,0 +1,6 @@
+Placeholder files for TD Studios page:
+
+1. td-studios-logo.jpg - Should be the patriotic TD STUDIOS logo image
+2. diamond-background.jpg - Should be the diamond/sparkle background image
+
+These files need to be replaced with the actual images provided by the user.

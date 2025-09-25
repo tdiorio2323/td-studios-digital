@@ -7,10 +7,10 @@ const TdDesigns = () => {
   const logo = "/TD STUDIOS WHITE TEXT.png";
 
   // Bouncing background logo (desktop only) - Chrome TD Studios logo (Image #1)
-  const bounce = ["/TD STUDIOS WHITE TEXT.png"]; 
+  const bounce = ["/TD STUDIOS WHITE TEXT.png"];
 
   // TD slideshow images for the bottom image box
-  const tdImages = ["/TD STUDIOS WHITE TEXT.png"]; 
+  const tdImages = ["/TD STUDIOS WHITE TEXT.png"];
 
   // Use first image as default, slideshow will cycle through all
   const promoImage = tdImages[0];
@@ -22,7 +22,7 @@ const TdDesigns = () => {
   const customButtons = [
     { label: "WEBSITE", url: "https://tdstudiosny.com" },
     { label: "CUSTOM DESIGNS", url: "https://tdstudiosny.com/custom-designs" },
-    { label: "CONTACT", url: "https://t.me/tdstudioscorp" }
+    { label: "CONTACT", url: "https://t.me/tdstudioscorp" },
   ];
 
   return (

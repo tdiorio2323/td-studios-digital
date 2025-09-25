@@ -115,7 +115,8 @@ export const BouncingLogoBackground: React.FC<Props> = ({
           // Try fallbacks if provided
           const el = e.currentTarget as HTMLImageElement;
           const current = sources.indexOf(el.src);
-          const next = current >= 0 && current < sources.length - 1 ? current + 1 : 1; // default try second
+          const next =
+            current >= 0 && current < sources.length - 1 ? current + 1 : 1; // default try second
           if (sources[next]) {
             el.src = sources[next];
           }
